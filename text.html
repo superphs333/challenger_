@@ -1,0 +1,216 @@
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <title>Bootstrap 101 Template</title> -->
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+ <!-- 외부 css 불러오기 -->
+ <link rel="stylesheet" type="text/css" href="./whole.css" />
+<style>
+
+</style>
+
+</head>
+<body>
+    <button id="payment" onclick="Payment()">결제하기</button>
+    <button id="refund" onclick="cancelPay()">환불하기</button>
+
+
+
+
+
+
+
+<!-- 제이쿼리 -->
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script><!-- jQuery CDN --->
+
+<script>
+// 가맹점 식별코드
+var IMP = window.IMP; 
+  // 생략해도 괜찮다
+IMP.init("imp80487409"); 
+  // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용
+  // 일찍 호출해두면 좋음(DOM Ready혹은 페이지 로딩 후)
+
+// 결제창 호출코드 
+function Payment(){
+    // IMP.request_pay(param, callback) 호출
+  // = 결체창 호출코드 추가하기
+  // param 객체 : 결제 승인에 필요한 정보를 담는다(어떤 고객이 주문하는 것인지, 어떠한 상품을 얼마에 결제할 것인지, 해당 주문번호는 무엇인지결제에 필요한 다양한 정보를 미리 약속된 속성에 지정할 수 있음)
+  /*
+  - pg(string) : 하나의 아임포트계정으로 여러 PG를 사용할 때 구분자
+    - 특징 
+      - (선택항목) 
+    - 예 : html5_inicis(이니시스 웹표준), inicis(이니시스 액티브x결제창),...
+  - pay_method(string) = 결제수단
+    ex)samsumg(삼성페이), card(신용카드), trans(실시간 계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
+  - escro(boolean) = 에스크로 결제여부(false)
+    - (선택항목) 에스크로가 적용되는 결제창을 호출
+  - merchant_uid(string) = 가맹점에서 생성/관리하는 고유 주문 번호(random)
+    - (필수항목)결제가 된 적이 있는 merchant_uid로는 재결제 불가
+  - name(string) = 주문명(undefined)
+    - 선택항목
+    - 원활한 결제정보 확인을 위해 입력을 권장하고, 16자 이내로 작성하기를 권장한다
+  - amount(number) = 결제할 금액(undefined)
+    - 필수항목
+  - custom_data(object) = 가맹점 임의 지정 데이터(defined)
+    - 선택항목
+    - 주문건에 대해 부가 정보를 저장할 공간이 필요할 때 사용
+    - json notation(string)으로 저장 됨
+  - tax_free(number) = amount중면세공금가액(undefined) 
+    - 선택항목
+    - 면세공급가액을 지정한다 -> amount중에서 면세공급가액에 해당하는 금액을 지정한다
+  - language(string) = 결제창의 언어 설정(ko)
+    - 선택항목
+    - 구매자에게 제공되는 결제창 화면의 언어 설정
+  - buyer_name(string) = 주문자명(선택)
+  - buyer_tel(string) = 주문자 연락처(필수)
+    - 누락되거나 blank일 때 일부 PG사에서 오류 발생
+  - buyer_email(string) = 주문자Email(선택)
+  - buyer_addr(string) = 주문자 주소(선택)
+  - buyer_postcode(string)=주문자 우편번호(선택)
+  - dispaly(object) = 결제화면과 관련한 옵션 설정(선택)
+    - 구매자에게 제공된느 결제창 화면에 대한 UI옵션
+  */
+  IMP.request_pay({ // param
+    // IMP.request_pay(param, callback)을 호출하면 PC환경에서는 지정한 pg사의 결제모듈창이 나타난다
+
+    pg: "html5_inicis", 
+    pay_method: "card",
+    merchant_uid: "ORD20180131-0000012",
+    name: "챌린지",
+    amount: 100,
+    buyer_email: "gildong@gmail.com",
+    buyer_name: "홍길동",
+    buyer_tel: "010-4242-4242",
+    buyer_addr: "서울특별시 강남구 신사동",
+    buyer_postcode: "01181"
+  }, function (rsp) { 
+      // callback(결제 프로세스 완료 후 호출되는 함수)
+      /* RSP 속성명
+      - success(boolean) = 결제처리가 성공적이었는지 여부
+        -> 실제 결제승인이 이뤄졌거나, 가상계좌 발급이 성공된 경우 true
+      - error_code(string) = 결제처리에 실패한 경우 단축메시지
+      - error_msg(string)= 결체처리에 실패한 경우 상세 메세지
+      - imp_uid(string) = 아이포트 거래 고유 번호
+        - 아임포트에서 부여한느 거래건 당 고유한 번호
+        -> success:false일 때, 사전 validation에 실패한 경우라면, imp_uid는 null일 수 있다.
+      - merchant_uid(sting) = 가맹점에서 생성/관리하는 고유 주문 번호
+      - pay_method(string) = 결제수단
+        ex) card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
+      - paid_amount(number) = 실제 결제승인된 금액이나 가상계좌 입금예정 금액
+      - status(string) = 결재상태
+        ex) ready(미결제), paid(결제완료), cancelled(결제취소, 부분취소포함), failed(결제실패)
+      - name(string) = 주문명
+      - pg_provider(string) = 결제승인/시도된 PG사
+        ex)html5_inicis(웹표준방식의 KG이니시스), inicis(일반 KG이니시스), kakaopay(카카오페이), uplus(LGU+), nice(나이스정보통신), jtnet(JTNet), danal(다날)
+      - pg_tid(string) = PG사 거래 고유번호
+      - buyer _name(string) = 주문자 이름
+      - custom_data(opject) = 가맹점 임의 지정 데이터
+      - paid_at(number) = 결제승인시각(UNIX timestamp)
+      - receipt_url(string) = PG사이에서 발행된느 거래 매출전표url
+        - 전달되는 URL을 그대로 open하면 매출전표 확인 가능
+      */
+    if (rsp.success) { // 결제 성공 시 로직,
+        var msg = '결제가 완료되었습니다.';
+        msg += '고유ID : ' + rsp.imp_uid;
+        msg += '상점 거래ID : ' + rsp.merchant_uid;
+        msg += '결제 금액 : ' + rsp.paid_amount;
+        msg += '카드 승인번호 : ' + rsp.apply_num;
+        mst += '결제승인시각 :' + rsp.paid_at;
+        console.log(msg);
+
+        // 
+
+        // 결제 성공시 : 결제 승인 또는 가상계좌 발급에 성공한 겨우 jquery로 http요청
+        jquery.ajax({
+          url:"http://192.168.0.15/challenger/payment.php",
+          method:"POST",
+          header:{"Content-Type": "application/json"},
+          data: {
+            imp_uid: rsp.imp_uid,
+            merchant_uid: rsp.merchant_uid
+          },
+          success:function(data){
+          console.log(data);
+
+          },
+          error:function(request,status,error){
+          console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+          },
+          complete : function(data) {
+                  //  실패했어도 완료가 되었을 때 처리
+          }
+        });
+       
+    } else { // 결제 실패 시 로직,
+        console.log("결제실패");
+        console.log(rsp.error_msg);
+    }
+  });
+}
+
+
+
+// 1. 환불 요청하기
+function cancelPay(){
+      console.log("환불 요청하기");
+      jQuery.ajax({
+        "url": "http://192.168.0.15/challenger/refund.php",
+        "type": "POST",
+        "contentType": "application/json",
+          /* contentType
+          = 서버에 데이터를 보낼 때 사용함
+            - content-type헤더의 값
+          
+          json형태의 데이터를 주고 싶을 때는 => application/json지정
+          + request안에 포함된 json형태의 데이터를 받았을 때, 
+          이것을 보통 VO(혹은 DTO)에 다시 담아 사용하는데, 
+          .ajax는 데이터를 문자열화 해주지 않기 때문에 보낼 데이터를
+          JSON.stringify()로 감싸주어야 한다.
+          (그렇지 않을시 key:value형태의 패턴을 인식하지 못함)
+          */
+        "data": JSON.stringify({
+          /*
+          JavaScript값이나 객체를 JSON문자열로 변환
+          */
+          "merchant_uid": "ORD20180131-0000011", // 주문번호
+          "cancel_request_amount": 2000, // 환불금액
+          "reason": "테스트 결제 환불" // 환불사유
+        }),
+        "dataType": "json",
+        success:function(data){
+          console.log(data);
+        },
+        error:function(request,status,error){
+        console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+        },
+        complete : function(data) {
+                 //  실패했어도 완료가 되었을 때 처리
+        }
+      });
+}
+
+
+
+
+
+
+</script>
+</body>
+</html>

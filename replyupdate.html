@@ -1,0 +1,44 @@
+<?php
+// db, phpfunction 파일 불러오기
+include "./db.php";
+include "./phpfunction.php";
+
+// 카테고리
+$category = $_POST['category'];
+
+// 가져온 값 {writer:writer,content:content,number:number}
+$writer = $_POST['writer'];
+$content = $_POST['content'];
+$number = $_POST['number'];
+//echo "writer=".$writer."content=".$content."number=".$number;
+?>
+<table class="replylist_tb">
+    <tr class="replylist_tr">
+        <td class="replylist_td_left">                                
+            <?php
+            // 데이터베이스에 저장되어 있는 email을 기반으로 닉네임을 알아낸다
+            $fornick = mq("select * from members where email='{$writer}'");
+            $nick = $fornick->fetch_array();
+            $nick = $nick['nickname'];                                
+            echo $nick."님"; 
+            ?>               
+        </td>
+        <td class="replylist_td_right">
+            <!-- 댓글번호 정보 -->
+            <input type="hidden" class="reply_num"
+            value="<?php echo $number; ?>">
+            
+            <!-- 댓글 수정, 삭제 -->
+            <a class="updateok">등록</a> 
+            <a class="updateno">취소</a>
+
+        </td>
+    </tr>
+    <tr class="replylist_tr">
+        <td class="replylist_contenttd" colspan="2">
+            <textarea style="width: 90%; height:100px; resize: none;"
+            class="update_ta"><?php echo $content; ?></textarea>
+        </td>
+        
+    </tr>
+</table>

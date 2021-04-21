@@ -1,0 +1,683 @@
+/* 
+top.php.
+ */
+body{
+    padding : 0px; margin : 0px;
+}
+#topdiv{
+    color : white;
+    text-align: center;
+}
+
+/* 
+Home.php
+*/
+body#home{
+    
+    
+}
+.banner{
+    margin : 10px;
+    height: 200px;
+    padding : 10px;
+    font-weight: 1000;
+    border: 1px solid black;
+}
+
+/* 
+togetherchallenge.php
+ */
+#togetherchallenge h1{
+    margin : 10px;
+}
+
+/* 
+challengewrite.php
+ */
+#challengewrite h1{
+    margin : 10px;
+}
+#challengewritetable{ /*챌린지 개설 쓰기 전체 테이블*/
+    margin : 10px;
+    width : 100%;
+    border-spacing:20px; border-collapse: separate;
+}
+#challengewritetable tr{
+   margin : 10px;
+    
+}
+#challengewritetable td{
+  
+    /* text-align: center; */
+}
+#challengewritetable .title{ /*제목부분 : 이름, 썸네일..*/
+    width : 20%; 
+    text-align: center;
+    background-color: cadetblue;
+}
+#challengewritetable .content{/*내용부분*/
+    width : 80%; 
+}
+#challengewritetable img{/*테이블 안 이미지*/
+    width : 200px; height : 200px;
+}
+#challengewritetable input{/*내용부분-input*/
+    
+}
+/* 이름input */
+#challengewritetitle{
+    width : 80%;
+}
+
+/* 
+challengeread.php 
+*/
+#cr_content{ /*내용부분을 감싸는 div*/
+    margin : 10px;
+    height: auto;
+    clear: both;
+   
+}
+#cr_content img{  /*왼쪽 이미지 부분*/
+    
+    width : 200px; height: 200px;
+    float: left;
+}
+#cr_content table{ /* 오른쪽 표 부분 */
+    
+    float: left;
+    margin-left : 20px;
+}
+#challengereadtitle{
+    font-weight: bolder;
+    font-size: larger;
+}
+#cr_detail{
+    height: auto;
+    margin-top : 10px;
+    overflow : auto;
+    padding : 10px;
+}
+.checkspan{
+    border: 3px solid black;
+    margin: 10px;
+    padding : 10px;
+}
+#cr_content + div#check{ /*내용부분을 감싸는 div*/
+    text-align: center;
+    margin: 50px;
+}
+#cr_bookmark{ /*내용부분을 감싸는 div안의 span*/
+
+}
+#check{
+    text-align: center;
+    height: auto;
+}
+#visual{
+    text-align: center;
+    height: auto;
+    margin-top:10px;
+}
+#visual span{
+    text-align: center;
+    height: auto;
+    margin : 10px;
+}
+#otherchallenger{ /*다른 도전자 확인 버튼*/
+    margin-top : 10px;
+}
+/* 다른 도전자들의 인증샷 보여주는 부분의 div */
+#joinershots{
+    padding : 10px;
+    margin-top : 20px;
+    text-align: center;
+    /* background-color: darkcyan; */
+}
+#joinershots table{ /* 인증샷 테이블 */
+    width:auto;
+    /* background-color: darkcyan; */
+    text-align: center;
+    border-spacing: 20px;
+    border-collapse: separate;
+}
+#joinershots table td{ /* 인증샷 테이블 안에 td */
+    text-align: center;
+    width : 25%;
+}
+#joinershots table td img{ /* 인증샷 테이블 안에 이미지 */
+    width : 100px; height:100px;
+}
+#joinershots table td video{ /* 인증샷 테이블 안에 비디오 */
+    width : 100px; height:100px;
+}
+/* 수정하기, 삭제하기 버튼 */
+#cr_updateordelete{
+    text-align: center;
+    margin-top : 20px;
+}
+
+
+/* 
+댓글
+ */
+#reply{
+    margin : 10px; padding : 10px;
+    
+}
+#replywrite{ /*전체 테이블*/
+    width: 100%;
+}
+#replywrite tr{
+    width: 100%;
+}
+#rp_write{ /*댓글 입력 부분 td*/
+    height: 70px;  width: 80%;
+    
+}
+#replyinput{ /*댓글 입력 부분*/
+    width: 100%; height: 70px;  
+    resize: none;
+}
+#rp_button{ /*댓글 입력 버튼 부분 td*/
+    height: 70px;
+}
+
+#replybutton{ /*댓글 입력 버튼*/
+    height: 70px; 
+    margin-left: 5px;
+}
+
+
+/* 
+댓글
+*/
+#reply{ /*댓글부분*/
+    /* background-color: blueviolet; */
+    margin-top: 10px; margin-left:10px; margin-right: 10px;
+    width: 100%; height: fit-content;
+    padding : 10px;
+}
+
+#reply hr{
+    width: 100%;
+}
+
+#replyinput{ /*댓글입력*/
+    width : 90%;
+    height: 100px;
+    resize: none;  /*크기 조절 x*/
+}
+#replylist{ /*댓글 리스트*/
+    margin-top : 20px;
+}
+.replylist_tb{ /* 댓글 하나 테이블 */
+    /* border : 1px solid black; */
+    width: 90%; min-height: 50px;
+    margin: 10px;
+    background-color: #E6E6E6;
+}
+.replylist_td_left{ /*댓글정보부분(작성자, 날짜)*/
+    /* border : 1px solid black; */
+    width : 50%;
+}
+.replylist_td_right{ /*댓글정보부분 수정삭제or신고*/
+    /* border : 1px solid black; */
+    width : 50%;
+    text-align: right;
+} 
+.replylist_contenttd{ /*댓글내용부분*/
+    /* border : 1px solid black; */
+    column-span: 2;
+    min-height: 50px;
+}
+.update:hover{ /* 댓글 수정-hover효과*/
+    cursor: pointer;
+}
+.delete:hover{ /* 댓글 삭제-hover효과*/
+    cursor: pointer;
+}
+.update:visited{ /* 댓글 수정-visited효과*/
+    text-decoration: none;
+    color: black;
+}
+.delete:visited{ /* 댓글 삭제-visited효과*/
+    text-decoration: none;
+    color: black;
+}
+.updateok:hover{
+    cursor: pointer;
+}
+.updateok:visited{ 
+    text-decoration: none;
+    color: black;
+}
+.updateno:hover{
+    cursor: pointer;
+}
+.updateno:visited{
+    text-decoration: none;
+    color: black;
+}
+
+/*
+togetherchallenge.php
+*/
+/* 카테고리 선택 or 검색부분 */
+#selectsearch{
+    margin : 10px; height: 30px;
+}
+/* 카테고리 선택 select */
+#challengeselect{
+    width: 20%; height: 30px;
+}
+#jointime{
+    width: 30%; height: 30px;
+}
+/* 검색부분 input */
+#selectsearch #search{
+    width: 70%; height: 30px;
+}
+/* 검색버튼 부분  */
+#searchbtn{
+    height: 30px;
+}
+/* 개설하기 버튼을 감싸는 div */
+#writebuttonwrap{
+    margin-top : 5px;
+    margin-bottom: 1px;
+    text-align: right;
+    padding : 10px;
+    /* background-color: brown; */
+}
+/* 테이블 감싼느 div */
+#tc_tablewrap{
+    /* background-color: brown; */
+    text-align: center;
+    /* width:100%; */
+}
+/* 테이블 */
+#challengeviewtable{
+    margin-left: auto;
+    margin-right: auto;
+    /* width:100%; */
+    height: auto;
+    text-align: center;
+    border-spacing: 20px;
+    border-collapse: separate;
+}
+/* item 3개를 감싸는 tr(tr) */
+#challengeviewtable{
+
+}
+/* item 하나하나(td) */
+#challengeitem{
+    border: 3px black solid;
+    margin : 10px;
+    clear: both;
+    padding : 5px;
+    text-align: center;
+    width : 30%;
+    
+}
+/* 썸네일 이미지 */
+#challengeviewtable img{
+    width : 90px; height:90px;
+    float: left;
+}
+/* 썸네일 오른쪽 테이블 */
+#challengeitem table{
+    margin-left: 1px;
+    text-align: center;
+    width : 90px; height:90px;
+    padding: 0px;
+    float: left;
+}
+/* 타이틀부분 */
+#item_title{
+    font-weight: bolder;
+   
+}
+/* 아이템 - 구분 */
+#item_sort{
+    font-size: xx-small;
+}
+/* 아이템 - 기간 */
+#item_period{
+    font-size: x-small;
+    background-color: rgb(170, 224, 170);
+}
+/* 참가비용 */
+#item_entryfee{
+    font-size: x-small;
+    background-color: rgb(170, 224, 170);
+}
+/* 인증주기 */
+#item_frequency{
+    font-size: x-small;
+    background-color: rgb(170, 224, 170);
+}
+/* 달성률 */
+#item_achievementrate{
+    font-size: x-small;
+    background-color: rgb(170, 224, 170);
+}
+/* 환급 신청 결과 */
+#item_refundresult{
+    font-size: x-small;
+    background-color: rgb(170, 224, 170);
+}
+/*  */
+#item_joincount{
+    font-size: x-small;
+    background-color: rgb(170, 224, 170);
+}
+/*  */
+#item_joinable{
+    border: 1px solid black;
+    border-radius:50%;
+}
+/*
+mychallengenote.php
+*/
+/* 제목부분 */
+#mychallengenote h2{
+    margin : 10px;
+}
+
+/*
+challengeindividualread.php
+*/
+/* 달성률 */
+#achievementrate{
+    margin : 10px;
+}
+/* 인증사진올리기 */
+#shotinput{
+    margin : 30px;
+    text-align: center;
+}
+#shotinput h3{
+    background-color: cadetblue;
+    margin : 10px;
+}
+#shotinput table{
+
+}
+#shotinput td{ /* 인증샷 올리는 부분 하나를 감싸는 td */
+    border: 1px black solid; padding : 10px;
+}
+.shotimg{ /* 인증샷으로 올린 파일 미리보기 이미지 */
+    width : 80px; height : 80px;
+    margin-top: 10px; 
+    float : left;
+}
+.showplus{ /* 인증샷 설명/부가 textarea */
+    height: 100px; margin-top: 10px; margin-left:10px;
+    resize: none;
+}
+#shotsubmit{
+    margin-top: 20px;
+}
+
+/* 인증샷 보드 */
+#shotboard{
+    margin : 10px;
+    text-align: center; 
+}
+#shotboard h3{
+    background-color: cadetblue;
+}
+/* 내부 테이블 */
+#shotboard table{
+    width : 100%;
+    height: auto;
+    table-layout: fixed;
+    text-align: center;
+    /* 테이블 간격 */
+    border-spacing: 20px; border-collapse: separate;
+}
+#shotboard table tr{
+
+}
+#shotboard table img{ /*내부 테이블 이미지*/
+    width : 80px;
+    height: 80px;
+}
+#shotboard table video{ /*내부 테이블 비디오*/
+    width : 80px;
+    height: 80px;
+}
+td.shotitem{ /*하나 아이템*/
+    border: 3px solid black;
+    width : 80px; 
+}
+.fitcolor{ /*하나 아이템 - 색깔표현*/
+    min-width: 80px;
+}
+/* 달성률 */
+#achievementrate{
+    text-align: center;
+}
+/*
+otherchallenger.php
+*/
+#joinmembers{
+    margin : 10px;
+}
+#joinmembers div{
+    background-color: cornflowerblue;
+    margin : 5px; padding : 5px;
+    clear: both;
+    height: auto;
+}
+
+/* 
+nicknamechange.php
+*/
+/* 닉네임 입력 부분 */
+#inputNickname{
+    width : 100%;
+}
+
+/* 
+findpw.php
+*/
+/* 전체 div */
+#findpw{
+    text-align: center;
+}
+#findpw input{ /*입력칸*/
+    
+}
+#findpw button{  /*전송하기 버튼*/
+    width:100px;
+    background-color: #f8585b;
+    border: none;
+    color:#fff;
+    padding: 15px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+/* 
+challengemanagement.php
+*/
+#challengemanagement{
+    margin : 10px;
+    
+}
+
+/*
+joinerfeed.php
+*/
+#joinerfeed_info{
+    margin: 10px;
+}
+#joinerfeed_info span{ /*닉네임을 감싸는 부분*/
+    width: 400px;
+    height: 100px;
+    border: 1px solid yellowgreen;
+    border-radius: 10px;
+    background-color: yellowgreen;
+    font-size: larger;
+    font-weight: bolder;
+    padding : 20px;
+    margin-top : 100px;
+}
+#joinerfeed_info div{ /*해당 사용자의 정보 */
+    margin-top : 10px;
+}
+/* 인증샷 보여주는 피드부분 */
+#shotfeed{
+    margin: 10px;
+    text-align: center;
+}
+/* 인증샷 테이블 */
+#joinerfeedtable{
+    width : 100%;
+
+    /* 셀 간격 나누기 */
+    border-spacing: 5px;
+    border-collapse: separate;
+    /* background-color:orange; */
+}
+#joinerfeedtable td{
+    width : 33%;
+    /* background-color:burlywood; */
+}
+/* 아이템 타이틀 */
+#challengeitem_title{
+    font-weight: bolder;
+}
+/* 인증샷 사진or비디오 사이즈 */
+#challengeitem img{
+    width : 150px;
+    height : 150px;
+}
+#challengeitem video{
+    width : 150px;
+    height : 150px;
+}
+/* 하트, 댓글, 신고 */
+#challengeitem_check{
+    
+}
+/* 
+joinfeedone.php
+*/
+#joinfeedone{
+    margin : 10px;
+    /* background-color: cornflowerblue; */
+}
+/* 닉네임, 날짜 표시하는 부분 */
+#nickanddate{
+    /* background-color: rgb(47, 155, 110); */
+    width : 50%;
+    clear: both;
+    margin: 5px;
+}
+#nickanddate .left{
+    /* background-color: rgb(92, 29, 121); */
+    float: left;
+    width: 50%;
+    /* border: 1px solid black; */
+    /* text-align: center; */
+}
+#nickanddate .right{
+    /* background-color: red; */
+    float: left;
+    width: 50%;
+    text-align: right;
+}
+/* joinfeedond의 사진or비디오 */
+#joinfeedone img{
+    width : 300px;
+    height : 300px;
+
+}
+#joinfeedone video{
+    width : 300px;
+    height : 300px;
+
+}
+/* 챌린지명 */
+#challengetitle{
+/* 오른쪽 정렬 */
+text-align: right;
+}
+.joinfeedonereply{
+    float:left;
+}
+/* 체크 표시 img들(작게) */
+#check img{
+    width : 30px;
+    height : 30px;
+    text-align: left;
+    
+}
+/*
+shotmanagement.php
+*/
+/* 인증샷 테이블 */
+#shotmanagement_shots table{
+    /* background-color: cornflowerblue; */
+    width: 100%;
+    border: 1px black solid;
+    text-align: center;
+}
+#shotmanagement_shots th{
+    /* background-color: cornflowerblue; */
+    border: 1px black solid;
+    background-color: darkgrey;
+    text-align: center;
+}
+#shotmanagement_shots td{
+    border: 1px black solid;
+    text-align: center;
+}
+/* 테이블 안에 이미지, 비디오 */
+#shotmanagement_shots img{
+    width : 100px;
+    height : 100px;
+}
+#shotmanagement_shots video{
+    width : 100px;
+    height : 100px;
+}
+.okno{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+}
+/*
+myshotask.php
+*/
+/* 전체 테이블 */
+#myshotasktable{
+    width: 100%;
+    border: 1px black solid;
+    text-align: center;
+}
+#myshotasktable th{
+    border: 1px black solid;
+    background-color: darkgrey;
+    text-align: center;
+}
+#myshotasktable td{
+    border: 1px black solid;
+    text-align: center;
+}
+/* 테이블 안에 이미지, 비디오 */
+#myshotasktable img{
+    width : 80px;
+    height : 80px;
+}
+#myshotasktable video{
+    width : 80px;
+    height : 80px;
+}
