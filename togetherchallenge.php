@@ -5,9 +5,12 @@
     <link rel="stylesheet" type="text/css" href="./whole.css" />
 </head>
 <body id="togetherlenge">
-    <?php include_once "./top.php";  include_once "./phpfunction.php";?>
+    <?php include_once "./top.php"; ?>
+
+    <br>
     <h1 style="text-align:center">챌린지</h1>
 
+    <!-- 게시물 sort : 카테고리/검색값/체크박스(참여가능한) -->
     <div id="selectsearch">
         
         <!-- 카테고리 선택 -->
@@ -37,14 +40,24 @@
 
     </div>
 
-    <!-- 글쓰기 -->
+    <!-- 개설하기 버튼 : 관리자 계정이 아니면, 개설하기/수정하기는 할 수 없음 -->
     <?php
-    // 관리자 계정이 아니면, 개설하기/수정하기는 할 수 없음
-    if($_SESSION['user']=="admin@challenger.com"){?>
+    // 데이터베이스에서 가져온다
+    $forsort = mq("select * from members where email='{$_SESSION['user']}'");
+    $forsort = $forsort->fetch_array();
+    $membersort = $forsort['sort'];
+    //echo $membersort;
+
+    if($membersort=="staff"){
+        echo <<<EOT
         <div id="writebuttonwrap">
             <button onClick="location.href='challengewrite.php'">개설하기</button>
         </div>
-    <?php } ?>
+EOT;
+    }
+    ?>
+
+  
     
 
 
@@ -66,28 +79,14 @@
         if($challengeselect=="전체"){$challengeselect="";}
         $search = $_GET['search']; // 검색
         $joinable = $_GET['joinable']; // joinable선택
-        
-        // 카테고리
-        if($challengeselect==""){// 카테고리 선택이 없다면
 
-            // 참여 가능 or 무관
-            if($joinable==""){  // 무관
-                $temp = "select * from challenge where title like '%{$search}%'";
-            }else{ // 참여 가능한 이벤트만
-                $temp = "select * from challenge where title like '%{$search}%' and startday>=DATE(NOW())";
-            }
-
-        }else{ // 카테고리 선택이 있다면
-
-             // 참여 가능 or 무관
-            if($joinable==""){ // 무관
-                $temp = "select * from challenge where sort='{$challengeselect}' and title like '%{$search}%' ";
-            }else{ // 참여 가능한 이벤트만
-                $temp = "select * from challenge where sort='{$challengeselect}' and title like '%{$search}%' and startday>=DATE(NOW())";
-            }
+        // 참여가능 or 무관
+        if($joinable==""){ // 무관
+            $temp = "select * from challenge where sort like '%{$challengeselect}%' and title like '%{$search}%' ";
+        }else{ // 참여 가능한 이벤트만
+            $temp = "select * from challenge where sort like '%{$challengeselect}%' and title like '%{$search}%' and startday>=DATE(NOW())";
         }
-
-        
+                
      
         //echo $temp."<br>";
         $sql = mq($temp." order by idx desc");
@@ -139,40 +138,42 @@
         $sql = mq($temp." order by idx desc limit {$start_record},{$list}");
 
         if(!$sql){ // sql문 실패 
-        echo mysqli_error($db);
+            echo mysqli_error($db);
         }else{ //sql문 성공 ?> 
 
+            <!-- 3*3형 -->
             <table id="challengeviewtable">
                 <?php
                 for($i=0; $i<3; $i++){
                     echo "<tr>";
                     for($j=0; $j<3; $j++){
-                        $row = $sql->fetch_array();
+                        $row = $sql->fetch_array(); // 계속 다음 정보를 가져옴
 
-                        // 더이상 정보가 없다면 td만들지x
+                        // 더이상 정보가 없다면 td만들지x(더 이상 가져올 정보가 x)
                         if($row==""){break;}
 
                         $idx = $row['idx']; //글번호
                         $thumbnail = $row['thumbnail']; //썸네일
                         $title = $row['title']; //타이틀 
-                        $startday=$row['startday'];
-                        $endday=$row['endday'];
-                        $entryfee=$row['entryfee'];
-                        $frequency=$row['frequency'];
+                        $startday=$row['startday']; // 시작일
+                        $endday=$row['endday']; // 종료일
+                        $entryfee=$row['entryfee']; // 참가비
+                        $frequency=$row['frequency']; 
                         $proofshotcount=$row['proofshotcount'];
-                        $sort=$row['sort'];
+                        $sort=$row['sort']; // 카테고리
 
                         // 참여자수
                         $joincount = "select * from challenge_join where idx='{$idx}'";
                         $sqljoincount = mq($joincount);
                         $joincount = mysqli_num_rows($sqljoincount);
 
-                        // 기간
+                        // 기간표시(2일 or 1주...)
                         $days = datediff($startday,$endday)+1;
                         $wholeweeks = $days/7;
-
                         ?>
                         <td id="challengeitem" style=cursor:hand; onclick=location.href="./challengeread.php?idx=<?php echo $idx; ?>">
+                        
+
                             <!-- 썸네일 이미지 부분 -->
                             <img src="<?php echo $thumbnail ?>">
                             <table>
@@ -327,9 +328,7 @@
                   
     ?>
 
-    <footer style="width:100%; height:30px; background-color:black; text-align:center">
-    <font style="color:white">문의전화 : 010-0000-0000</font>
-    </footer>
+  
     
 
 

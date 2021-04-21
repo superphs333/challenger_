@@ -29,10 +29,12 @@ Include_once "./top.php";
     <h4>Challenger가 제시하는 도전에 참여해보세요. 참여비를 내면 참여 할 수 있고 일정 달성률 이상이면 다시 환급받으실 수 있습니다</h4>
 </div>
 
-<!-- 가장 인기있는 챌린지 목록 -->
-<h1>TOP5 챌린지</h1>
-<div class="banner" id="top">
-
+<!-- 
+    가장 인기있는 챌린지 목록 
+    : 조회수+북마크 합산점수
+-->
+<div id="top_challenge">
+    <h1>TOP5 챌린지</h1>
 </div>
 
 
