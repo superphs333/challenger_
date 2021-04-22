@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
 
     console.log("challengewrite.js");
@@ -8,7 +6,7 @@ $(document).ready(function () {
 
     // 서머노트
     $('#summernote').summernote({
-                        // set editor height
+        // set editor height
         minHeight: null,             // set minimum height of editor
         maxHeight: null,             // set maximum height of editor
         
@@ -16,7 +14,7 @@ $(document).ready(function () {
         //placeholder: 'placeholder',
         callbacks: {
             onImageUpload: function (files, editor, welEditable) {
-                // 올릴파일, 에디터, 
+                // 올릴파일, 에디터
                 console.log("이미지업로드함"+files);
                 for(var i= files.length-1; i>=0; i--){
                     sendFile(files[i],editor,welEditable);
@@ -40,10 +38,10 @@ $(document).ready(function () {
         if((month+"").length<2){month = "0" + month;}
         var date = now.getDate(); // 현재 날짜 가져오기
         if((date+"").length<2){date = "0" + date;}
-        
         // 오늘날짜
         var today = year +"" + month + "" + date;
         console.log("오늘날짜="+today);
+
         // 받아온 날짜
         var get = $(this).val();
         var get = get.split("-"); // - 로 잘라서 배열에 저장
@@ -55,7 +53,6 @@ $(document).ready(function () {
 
         if(parseInt(get)<parseInt(today)){ // 불가한 경우
             console.log("불가");
-           
             $("#cw_startday").val($.datepicker.formatDate('yymmdd', new Date()));
         }
 
@@ -65,7 +62,7 @@ $(document).ready(function () {
     1주일 이상 선택 => #weekselect보이게
     1주일 이하 선택 => #dayselect보이게
     */
-    // 버튼이름이 수정일 경우, 
+    // 버튼이름이 수정일 경우 -> 기존값 셋팅하기
     var buttonname = $("#cw_submit").text();
     var weekorday = $("#weekorday").val();
     console.log("weekorday="+weekorday);
@@ -92,7 +89,7 @@ $(document).ready(function () {
             $("#weekselect").val(detailday);
         }
     }else{
-        // 처음에는 ~일선택 보이지 않게
+        // 처음에는 ~일선택 보이지 않게(주가 기본)
         $("#dayselect").hide(); $("#day").hide(); 
     }
 
@@ -109,17 +106,12 @@ $(document).ready(function () {
             $("#day").hide();  $("#week").show(); 
             $("#weekorday").val("week");
 
-            // 인증빈도 설정 보이기
-            $("#frequencyselect").show();
-
         }else{ //#datyselect보이게
             $("#dayselect").show();
             $("#weekselect").hide();
             $("#week").hide(); $("#day").show(); 
             $("#weekorday").val("day");
-
-            // 인증빈도 설정 없음
-            $("#frequencyselect").hide();
+   
         }
     });
 
@@ -354,7 +346,7 @@ function sendFile2(file,selector){
         /* FormData.append() = FormData객체안에 이미 키가 존재하면, 
         그 키에 새로운 값을 추가하고, 키가 없으면 추가한다.
         */
-    data.append("category","thumbnail");
+    data.append("category","thumbnail"); // 어디에 저장될 파일인지 알려줌
     
 
     // 서버에 보내서, 저장
@@ -368,8 +360,8 @@ function sendFile2(file,selector){
         data : data,
         success : function(url){
             tempurl = url;
-            console.log("url="+url);            
-            selector.attr("src",url);
+            console.log("url="+url); // 선택한 이미지의 경로           
+            selector.attr("src",url); // <img>에 셋팅
         } 
     });
 }
@@ -378,6 +370,7 @@ function sendFile2(file,selector){
 function handleImgFileSelect(e){
     console.log("썸네일 파일 변화");
     console.log(e);
+
     var sel_files;
 
     /* 
@@ -401,7 +394,7 @@ function handleImgFileSelect(e){
         // filesArr=[object File]
     console.log(filesArr[0]);
         /* ex
-        File {name: "994BEF355CD0313D05.png", lastModified: 1591653024171, lastModifiedDate: Tue Jun 09 2020 06:50:24 GMT+0900 (대한민국 표준시), webkitRelativePath: "", size: 24572, …}
+        File {name: "994BEF355CD0313D05.png", lastModified: 1591653024171, lastModifiedDate: Tue Jun 09 2020 06:50:24 GMT+0900 (대한민국 표준시), webkitRelativePath: "", size: 24572, …}
         */
     
     filesArr.forEach(function(f){

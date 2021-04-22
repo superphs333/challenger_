@@ -11,7 +11,7 @@
     //$idx = $_GET['post']; 
     $idx=$_GET['idx'];
 
-    // 데이터베이스 불러오기
+    // 데이터베이스 불러오기.
     $sql = mq("select * from challenge where idx={$idx}");
     // 만약, 데이터베이스에 존재하지 않는 idx라면 알림창/뒤로가기
     if($sql->num_rows==0){
@@ -20,6 +20,8 @@
         history.back();
         </script>";
     }
+
+
     $sql = $sql->fetch_array();
     $title = $sql['title'];
     $startday = $sql['startday'];
@@ -51,10 +53,11 @@
         <a id="chdelete">삭제하기</a>
     </div>        
     <?php } ?>
-    <!-- <h1>챌린지 개설</h1> -->
     <hr>
+
     <input type="hidden" id="participant" value="<?php echo $_SESSION['user'] ?>">
     <input type="hidden" id="idx2" value="<?php echo $idx ?>">
+
     <!-- 내용 -->
     <div id="cr_content">
         <img src="<?php echo $thumbnail ?>">
@@ -111,6 +114,7 @@
         <br><br> 
     </div>
     
+    <!-- 상세설명 -->
     <div id="cr_detail"><?php echo $additionaldescription ?></div>
     
     <br>
@@ -184,12 +188,12 @@
     }
 
     // 값이 1이상이라면 => 이미 참여하기를 누른 사용자
-    if(mysqli_num_rows($joincheck)>=1){ //북마크 체크ok
+    if(mysqli_num_rows($joincheck)>=1){ // 참여중
         echo "<script>
         $('#cr_join').css('background-color','skyblue');
         $('#joincheck').val('1');
         </script>";
-    }else{
+    }else{ // 참여하고 있지 않음
         echo "<script>        
         $('#joincheck').val('0');
         </script>";
@@ -214,29 +218,39 @@
     -->
     <div id="joinershots">
         <!-- 
-        6장 정도를 보여주고
+        5장 정도를 보여주고
         - 클릭하면 => 새창
         - 아래에 => 인증샷 모두 보기
          -->
         <h3>인증샷 모음</h3>
         <?php
+        // 인증샷 갯수
+        $joinershots = mq("select * from challengeshot left join members ON challengeshot.joiner=members.email where challengeidx={$idx} order by idx desc limit 5");
+        $joinerount = mysqli_num_rows($joinershots);
+        //echo "joinercount=".$joinerount;
+
         // 필요정보
-        $joinershots = mq("select * from challengeshot where challengeidx={$idx} order by idx desc limit 5");
-        $joinercount = $joinershots->fetch_array();
-        if($joinercount==null){ // 인증샷이 없는 경우
+        // $joinershots = mq("select * from challengeshot where challengeidx={$idx} order by idx desc limit 5");
+        // $joinercount = $joinershots->fetch_array();
+        
+        if($joinercount=0){ // 인증샷이 없는 경우
            echo "<div>아직 인증샷이 없습니다</div>";
         }else{ // 인증샷 있는 경우?>
-                <table id="read_shots">
+            
+        <table id="read_shots">
             <tr>
             <?php
+
             while($row=$joinershots->fetch_array()){
+
                 // 가져올 정보 : idx, shot, date,fit, joiner
-                $challengeidx=$row['idx'];
-                $shot=$row['shot'];
-                
-                $joiner=$row['joiner'];
-                $date=$row['date'];
-                $fit=$row['fit'];     ?>   
+                $challengeidx=$row['idx']; // challengeidx
+                $shot=$row['shot']; // 이미지 주소
+                $joiner=$row['joiner']; // 작성자(샷작성자)
+                $nickname=$row['nickname']; // 작성자 닉네임
+                $date=$row['date']; // 찍은 날짜
+                $fit=$row['fit']; // 적절여부
+                ?>   
                 
                 <!-- td클릭하면 해당-->
                 <td>
@@ -251,11 +265,7 @@
                     <!-- 닉네임 -->
                     <!-- 닉네임 클릭하면, 개인 페이지로 이동 -->
                     <?php 
-                    $nickname2 = "select * from members where email='{$joiner}'";
-                    $nickname2 = mq($nickname2);
-                    $nickname2 = $nickname2->fetch_array();
-                    $nickname2 = $nickname2['nickname'];
-                    echo $nickname2;
+                    echo $nickname;
                     ?>
                     
                     <!-- 적합성
@@ -277,9 +287,7 @@
                     <div class="fitcolor" style="background-color:<?php echo $color ?>; min-width:100%;"><img style="width:20px; height:20px;" src="<?php echo $icon; ?>"></div>
 
                     <!-- 날짜 -->
-                    <div><?php echo $date ?></div>
-
-                
+                    <div><?php echo $date ?></div>      
                 </td>
                 
             <?php } ?>
@@ -295,6 +303,7 @@
 
     <!-- 댓글 -->
     <div id="reply">
+
         <!-- 댓글입력부분 -->
         <table id="replywrite">
             <tr>
@@ -317,8 +326,10 @@
         <div id="replylist">
             <?php
             // 전체 행 가져오기
-            $sqlreply = mq("select * from challenge_reply where con_num={$idx} order by idx asc");
+            $temp  = "select idx, con_num, challenge_reply.email, content, date, nickname from challenge_reply left join members on challenge_reply.email=members.email where con_num={$idx} order by idx asc";
 
+            $sqlreply = mq($temp);
+            // "select * from challenge_reply where con_num={$idx} order by idx asc";
             if($sqlreply){ // 쿼리문 성공
                while($reply=$sqlreply->fetch_array()){ ?>
 
@@ -328,10 +339,7 @@
                         <!-- 닉네임, 댓글 -->
                         <td class="replylist_td_left">
                             <?php
-                            // 데이터베이스에 저장되어 있는 email을 기반으로 닉네임을 알아낸다                            
-                            $fornick = mq("select * from members where email='{$reply['email']}'");
-                            $nick = $fornick->fetch_array();
-                            $nick = $nick['nickname'];
+                            $nick = $reply['nickname'];
                             echo $nick."님";
                             ?>&nbsp;&nbsp;&nbsp;
                             <?php
@@ -373,8 +381,6 @@
                     </tr>
                 </table>
             <?php  }
-            }else{
-                // 쿼리문 실패 -> 경고문 + 뒤로가기
             }
             ?>
         </div>

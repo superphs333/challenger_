@@ -1,8 +1,8 @@
-//Jquery 화면을 불러오자마자 실행
+//Jquery 화면을 불러오자마자 실행 
 $(document).ready(function () {
     console.log("challengeindividualread.js시작");
 
-    // 파일선택(change) => 서버에 저장 => img에 미리보기
+    // 파일선택(change) => 서버에 저장 => img에 미리보기 
     $(document).on("change", ".shotfile", function () {
         console.log("파일선택 버튼 클릭=>파일변화");
 
@@ -12,7 +12,7 @@ $(document).ready(function () {
 
 
 
-        // 서버에 이미지 저장, <img>에 미리보기
+        // 서버에 이미지 저장, <img>에 미리보기 
         var imgsrc = handleImgFileSelect(event, index);
     });
 

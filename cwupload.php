@@ -1,5 +1,5 @@
 <?php
-    // 카테고리 : 써머노트 / 썸네일 이미지
+    // 카테고리 : 써머노트 / 썸네일 이미지 / 인증샷 이미지
     //echo $_POST['category'];
         
         if($_FILES['file']['name']){
@@ -7,7 +7,6 @@
             $_FILES['file']['name'] = 클라이언트 머신에 존재하는 파일의 원래 이름
             */
             
-
             if(!$_FILES['file']['error']){ // 에러가 없다면,
     
                 // 파일 이름 정하기
@@ -21,7 +20,7 @@
                 // 지정한파일이름.파일형식으로 파일네임 정하기
                 $filename = $name.'.'.$ext[1];
     
-                // 경로지정
+                // 경로지정(분기)
                 if($_POST['category']=="thumbnail"){
                     $destination = './upload/thumbnail/'.$filename;
                 }else if($_POST['category']=="shots"){
@@ -43,7 +42,7 @@
                 //     echo "에러=====>".$_FILES['file']['error'];
                 // }
     
-                echo $destination; 
+                echo $destination;  // 경로명 출력
                     // ./upload/cwupload/20200627080641.jpg
             }
         }

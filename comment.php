@@ -1,8 +1,7 @@
 <!-- 댓글한개 -->
 <?php
-    // 닉네임(이메일을 통해서), 날짜, 댓글번호, 댓글내용
+    // 닉네임(이메일을 통해서), 날짜, 댓글번호, 댓글내용 
     // $nick, $date, $replyidx, $content, $email
-    
 ?>
 <table class="replylist_tb">
     <tr class="replylist_tr">

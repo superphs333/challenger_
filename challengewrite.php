@@ -1,7 +1,7 @@
 
 <html>
 <head>
-    <!-- 외부 css 불러오기 -->
+    <!-- 외부 css 불러오기. -->
     <link rel="stylesheet" type="text/css" href="./whole.css" />
 </head>
 <body id="challengewrite">
@@ -9,13 +9,7 @@
     Include "./top.php";
    
     // 관리자 계정이 아니라면, 뒤로가기
-    if($_SESSION['user']!="admin@challenger.com"){
-        echo "권한없음";
-        echo"<script>
-        alert('권한없는 페이지 입니다');
-        history.back();
-        </script>";
-    }
+    onlyadmin();
     ?>
     <h1>챌린지 개설</h1>
     <hr>
@@ -46,7 +40,7 @@
             </td>
             <td class="content">
                 <input type="file" id="cwthumbnailfile">
-                <img id="cwthumbnailimg" src="./upload/thumbnail/202006300556298f85517967795eeef66c225f7883bdcb.png">
+                <img id="cwthumbnailimg" src="./upload/thumbnail/2021042109413347d1e990583c9c67424d369f3414728e.jpg">
             </td>
         </tr>
         <tr>
@@ -66,15 +60,11 @@
                 <!-- 1주일 이하 선택했을 경우 -->
                 <input type="number" id="weekselect" min="1" value="1" onkeyup="this.value=minmax(this.value,1,100)">&nbsp
                 <c id="week">주</c> <c id="day">일</c>
+                <!-- 선택 알려줌(주or일) -->
                 <input type="hidden" id="weekorday" value="week">
             </td>
         </tr>
-        <!-- <tr>
-            <td class="title">종료일</td>
-            <td class="content">
-                <input type="date" id="cw_endday">
-            </td>
-        </tr> -->
+
         <tr>
             <td class="title">참가비</td>
             <td class="content">
@@ -119,8 +109,6 @@
         <tr>
             <td class="title">설명</td>
             <td class="content"><textarea id="summernote"></textarea></td>
-                
-            
         </tr>
     </table>
     <button id="cw_submit">개설하기</button>

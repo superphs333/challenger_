@@ -3,7 +3,7 @@
 ?>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bootstrap 101 Template</title>
@@ -27,7 +27,6 @@ Include "./top.php";
     //$idx = $_GET['post']; 
     $idx=$_GET['idx'];
 
- 
 
     // 데이터베이스 불러오기
     $sql = mq("select * from challenge where idx={$idx}");
@@ -41,16 +40,16 @@ Include "./top.php";
         </script>";
     }
 
-    $title = $sql['title'];
-    $startday = $sql['startday'];
-    $endday = $sql['endday'];
-    $entryfee = $sql['entryfee'];
-    $additionaldescription = $sql['additionaldescription'];
-    $thumbnail = $sql['thumbnail'];
+    $title = $sql['title']; // 제목
+    $startday = $sql['startday']; // 시작일
+    $endday = $sql['endday']; // 종료일
+    $entryfee = $sql['entryfee']; // 참가비
+    $additionaldescription = $sql['additionaldescription']; // 추가적인 설명
+    $thumbnail = $sql['thumbnail']; // 썸네일 주소
     $frequency = $sql['frequency'];
-    $writer = $sql['writer']; 
-    $sort = $sql['sort'];
-    $proofshotcount = $sql['proofshotcount'];
+    $writer = $sql['writer']; // 작성자
+    $sort = $sql['sort']; // 카테고리
+    $proofshotcount = $sql['proofshotcount']; // 인증샷수
     $video = $sql['video']; // 비디오 여부
 
     // 비디오 인증인지, 사진인증인지 구분
@@ -63,8 +62,11 @@ Include "./top.php";
     $endtime = $sql['endtime']; // 인증 끝 시간
 ?>
 <input type="hidden" id="participant" value="<?php echo $_SESSION['user'] ?>">
+    <!-- 이부분은 없어도 됨 -->
 <input type="hidden" id="idx2" value="<?php echo $idx ?>">
+    <!-- 이 부분도 -> 제이쿼리에서 get값을 가져오면 된다 -->
 <!-- 내용 -->
+
 <div id="cr_content">
     <img src="<?php echo $thumbnail ?>">
     <table>
@@ -130,16 +132,20 @@ Include "./top.php";
     </details> 
 </div>
 <hr>
+
+
 <?php
 /*
 만약 인증가능한 기간이 아니라면,인증샷을 올릴 수 없게 한다.
 */
-$today = date("Y-m-d");
-$fromday = date($startday);
-$to_day = date($endday);
-$today = strtotime($today);
-$fromday = strtotime($fromday);
-$to_day = strtotime($to_day);
+// 날짜
+$today = date("Y-m-d"); // 오늘
+$fromday = date($startday); // 시작일
+$to_day = date($endday); // 종료일
+// 날짜 비교를 위해
+$today = strtotime($today); // 오늘
+$fromday = strtotime($fromday); // 시작일
+$to_day = strtotime($to_day); // 종료일
 if($today>=$fromday && $today<=$to_day ){// 인증가능 기간 ?>
 
 <?php
@@ -492,7 +498,7 @@ if(!$sql){ // 실패
 </div>
 
 
-<!-- 제이쿼리 -->
+<!-- 제이쿼리  -->
 <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="challengeindividualread.js"></script>

@@ -1,6 +1,4 @@
-<?php
 
-?>
 <html>
 <head>
 <meta charset="utf-8">
@@ -30,13 +28,14 @@ $nickname = $_GET['joiner'];
     <?php echo $nickname."님" ?>
     </span><br><br>
     
-    <!-- 게시물 갯수 -->
     <?php
     // 이 닉네임을 가진 멤버의 이메일 얻기
-    $foremail = "select * from members where nickname='{$nickname}'";
+    $foremail = "select email from members where nickname='{$nickname}'";
     $foremail = mq($foremail);
     $email = $foremail->fetch_array();
     $email = $email['email'];
+
+    // 게시물의 갯수
     $forcount = "select * from challengeshot where joiner='{$email}'";
     $forcount = mq($forcount);
     $count = $forcount->num_rows;
@@ -113,7 +112,7 @@ if($sql->num_rows==0){
             $title = $row['title']; // 챌린지명
             $challengelink = $row['challengeidx'];// 챌린지 idx(링크위해)
             $imgorvideo = $row['video']; //사진or비디오
-            $src = $row['shot'];
+            $src = $row['shot']; // 이미지 주소
             $shotidx = $row['idx']; // 샷의 idx
             ?>
             
@@ -133,15 +132,6 @@ if($sql->num_rows==0){
                 <video src="<?php echo $src ?>" controls>해당 브라우저는 video 태그를 지원하지 않습니다</video>
                 <?php }  ?><br>
 
-                <!-- 하트, 댓글, 신고 -->
-                <!-- <div id="challengeitem_check">
-               
-                    <span>하트</span>
-               
-                    <span>댓글</span>
-                  
-                    <span>신고</span>
-                </div> -->
             </td>
         <?php }
         echo "</tr>";
@@ -219,6 +209,8 @@ if($sql->num_rows==0){
 
 <!-- 제이쿼리 -->
 <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+<!-- 아래는 잘못쓴듯(그냥 남겨둠) -->
 <script src="challengeindividualread.js"></script>
 <script>
 

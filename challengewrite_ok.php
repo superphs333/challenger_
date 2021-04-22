@@ -3,7 +3,7 @@
     가져온 데이터 : sort:sort,title:title,thumbnail:thumbnail,startday:startday,endday:endday,entryfee:entryfee,shotcount:shotcount,summernote:summernote,frequency:frequency,period:period,video:video,starttime:starttime,endtime:endtime
     */
 
-    // db, phpfunction파일 불러오기
+    // db, phpfunction파일 불러오기.
     include "./db.php";
     include "./phpfunction.php";
 

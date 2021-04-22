@@ -7,8 +7,8 @@ include "./phpfunction.php";
 $category = $_COOKIE['category'];
 $check = $_COOKIE['check'];
 $idx = $_COOKIE['idx'];
-$user = $_SESSION['user'];
-$merchant_uid = $_COOKIE['merchant_uid'];
+$user = $_SESSION['user']; // 회원
+$merchant_uid = $_COOKIE['merchant_uid']; // 거래 고유 문자
 //echo "check=".$check.", idx=".$idx.", user=".$user.", idx=".$idx;
 
 /*

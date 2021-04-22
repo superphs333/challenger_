@@ -1,5 +1,5 @@
 <?php
-// db, phpfunction 파일 불러오기
+// db, phpfunction 파일 불러오기 
 include "./db.php";
 include "./phpfunction.php";
 
@@ -7,9 +7,9 @@ include "./phpfunction.php";
 $category = $_POST['category'];
 
 // 가져온 값 {writer:writer,content:content,number:number}
-$writer = $_POST['writer'];
-$content = $_POST['content'];
-$number = $_POST['number'];
+$writer = $_POST['writer']; // 가져올필요 없는데..
+$content = $_POST['content']; // 댓글내용
+$number = $_POST['number']; // 댓글번호
 //echo "writer=".$writer."content=".$content."number=".$number;
 ?>
 <table class="replylist_tb">

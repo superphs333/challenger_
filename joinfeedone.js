@@ -28,7 +28,8 @@ $(document).ready(function(){
 
             // 변화 한 후 체크값/하트상태
             $("#heartcheck").val("0");
-            $(this).attr('src','https://challengersactivity.tk/challenger/upload/shots/2020071208534242a0e188f5033bc65bf8d78622277c4e.png');
+            var test = 'https://my3my3my.tk/challenger/upload/shots/empty_heart.png';
+            $(this).attr('src','https://my3my3my.tk/challenger/upload/shots/empty_heart.png');
        }else{ // 색없음, 체크값 x
             console.log("색없음=>색있음");
             check = $("#heartcheck").val();
@@ -36,7 +37,7 @@ $(document).ready(function(){
 
             // 변화 한 후 체크 값/하트상태
             $("#heartcheck").val("1");
-            $(this).attr('src','https://challengersactivity.tk/challenger/upload/shots/20200712085440698d51a19d8a121ce581499d7b701668.png');
+            $(this).attr('src','https://my3my3my.tk/challenger/upload/shots/fill_heart.png');
        }
 
        // 데이터베이스에 반영
@@ -75,7 +76,7 @@ $(document).ready(function(){
 
             // 변화 한 후 체크값/사이렌상태
             $("#sirencheck").val("0");
-            $(this).attr('src','https://challengersactivity.tk/challenger/upload/shots/20200712112039fa7cdfad1a5aaf8370ebeda47a1ff1c3.png');
+            $(this).attr('src','https://my3my3my.tk/challenger/upload/shots/empty_siren.png');
         }else{ // 색없음, 체크값 x
             console.log("색없음=>색있음");
             check = $("#sirencheck").val();
@@ -83,7 +84,7 @@ $(document).ready(function(){
 
             // 변화 한 후 체크 값/사이렌상태
             $("#sirencheck").val("1");
-            $(this).attr('src','https://challengersactivity.tk/challenger/upload/shots/20200712114339d1f491a404d6854880943e5c3cd9ca25.png');
+            $(this).attr('src','https://my3my3my.tk/challenger/upload/shots/fill_siren.png');
         }
 
         // 데이터베이스에 반영

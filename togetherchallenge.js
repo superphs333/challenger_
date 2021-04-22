@@ -17,7 +17,7 @@ $(document).ready(function () {
    var search = getParameterByName("search");
    console.log(search);
    if(!search==""){ //null이 아닌경우, 검색값으로 
-        console.log("값이 들어와야 함");
+        //console.log("값이 들어와야 함");
         $('#search').val(search);
    }
    // joinable 
@@ -44,6 +44,7 @@ $(document).ready(function () {
     // 참여 가능한 이벤트만 보기
     $("#jointime").change(function () {
 
+                                             
         // 현재 체크 상태 
         var jointime = $("#jointime").val();
         console.log("이벤트 시기="+jointime);
@@ -66,7 +67,7 @@ $(document).ready(function () {
         
     });
 
-    // 참여 가능한 챌린지
+    // 참여 가능한 챌린지                       
     $("#joinable").change(function(){
 
         // var joinable = $("#joinable").val();

@@ -231,14 +231,15 @@ EOT;
                                         <span id="item_joincount"><?php echo $joincount."명 참가" ?></span>
                                     </td>
                                 </tr> 
-                                                                                                <!-- 참여 가능한 이벤트인 경우,
+
+                                <!-- 참여 가능한 이벤트인 경우,
                                초록색 네모-->
                                <?php
                                // 오늘날짜 <= 챌린지 시작일
-                               $timenow = date("Y-m-d");
-                               $str_now = strtotime($timenow);
+                               $timenow = date("Y-m-d"); // 오늘날짜
+                               $str_now = strtotime($timenow); // 오늘날짜
                                $str_target = strtotime($startday);
-                               if($str_now<=$str_target){
+                               if($str_now<=$str_target){ // 날짜 비교
                                 // 참여가능한 경우
                                 $color = "green";
                                }else{
@@ -260,73 +261,76 @@ EOT;
             </table>
 
         
-        <?php 
-        if($pageNum<=1){//페이지번호가 1보다 작거나 같다면
 
-            echo "<font size=2 color=red> [처음] </font>";
-                // 링크없이 그냥 처음이라는 문자만 출력
-        }else{ // 1보다 크다면
-    
-            echo "<font size=2><a href='togetherchallenge.php?page=&list={$list}&challengeselect={$challengeselect}&search={$search}&joinable={$joinable}'> [처음] </a></font>";
+        <!-- 
+            페이지 : 만약 total_rows(총 게시물수)=0이라면 페이지 관련 텍스트가 보이지 않아야 함
+         -->
+        <?php
         
-        }
+        if($total_rows!=0){
+            if($pageNum<=1){//페이지번호가 1보다 작거나 같다면
+
+                echo "<font size=2 color=red> [처음] </font>";
+                    // 링크없이 그냥 처음이라는 문자만 출력
+            }else{ // 1보다 크다면
         
-        if($block<=1){
+                echo "<font size=2><a href='togetherchallenge.php?page=&list={$list}&challengeselect={$challengeselect}&search={$search}&joinable={$joinable}'> [처음] </a></font>";
             
-            // block이 1보다 작거나 같다면 , 더 이상 거꾸로 갈 수 없으므로 아무 표시도 하지 않는다.
-            echo "<font></font>";
-        }else{  
-            $insertpage = $b_start_page-1;
-            echo "<font size=2><a href='togetherchallenge.php?page={$insertpage}&list={$list}&challengeselect={$challengeselect}&search={$search}&joinable={$joinable}'> 이전 </a></font>";
-        }
-        
-        for($j=$b_start_page; $j<=$b_end_page; $j++){
-            if($pageNum==$j){
-               
-                // pageNum=j이면, 현재 페이지이므로,링크걸지않고 그냥 현재 페이지만 출력
-                echo "<font size=2 color=red> {$j} </font>";
-            }else{
-               
-                echo"<font size=2><a href='togetherchallenge.php?page={$j}&list={$list}&challengeselect={$challengeselect}&search={$search}&joinable={$joinable}'> {$j} </a></font>";
-                    // 현재 페이지를 제외한 나머지 페이지 번호를 링크를 달아 출력하기
-
-                    
             }
             
-        }
-    
-        // 블럭의 총 갯수
-        $total_block = ceil($total_page/$b_pageNum_list);
-    
-        if($block>=$total_block){
+            if($block<=1){
+                
+                // block이 1보다 작거나 같다면 , 더 이상 거꾸로 갈 수 없으므로 아무 표시도 하지 않는다.
+                echo "<font></font>";
+            }else{  
+                $insertpage = $b_start_page-1;
+                echo "<font size=2><a href='togetherchallenge.php?page={$insertpage}&list={$list}&challengeselect={$challengeselect}&search={$search}&joinable={$joinable}'> 이전 </a></font>";
+            }
             
-            // block과 총block의 갯수가 값이 같다면, 맨 마지막 블록이므로 다음 링크버튼이 필요없어 보여주지 않는다.
-            echo "<font></font>";
-        }else{
-            // 그게아니라면, 다음 링크버튼을 걸어 보여준다
-            $temp = $b_end_page+1;
-            echo "<font size=2><a href='togetherchallenge.php?page={$temp}&list={$list}&challengeselect={$challengeselect}&search={$search}&joinable={$joinable}'> 다음 </a></font>";
-        }
+            for($j=$b_start_page; $j<=$b_end_page; $j++){
+                if($pageNum==$j){
+                   
+                    // pageNum=j이면, 현재 페이지이므로,링크걸지않고 그냥 현재 페이지만 출력
+                    echo "<font size=2 color=red> {$j} </font>";
+                }else{
+                   
+                    echo"<font size=2><a href='togetherchallenge.php?page={$j}&list={$list}&challengeselect={$challengeselect}&search={$search}&joinable={$joinable}'> {$j} </a></font>";
+                        // 현재 페이지를 제외한 나머지 페이지 번호를 링크를 달아 출력하기
     
-        // 마지막 링크 버튼
-        if($pageNum>=$total_page){
-            // 페이지넘버 = 총페이지
-            echo "<font size=2 color=red> [마지막] </font>";
-        }else{
-            //그게 아니라면
-            echo "<font size=2><a href='togetherchallenge.php?page={$total_page}&list={$list}&challengeselect={$challengeselect}&search={$search}&joinable={$joinable}'> [마지막] </a></font>";
+                        
+                }
+                
+            }
+        
+            // 블럭의 총 갯수
+            $total_block = ceil($total_page/$b_pageNum_list);
+        
+            if($block>=$total_block){
+                
+                // block과 총block의 갯수가 값이 같다면, 맨 마지막 블록이므로 다음 링크버튼이 필요없어 보여주지 않는다.
+                echo "<font></font>";
+            }else{
+                // 그게아니라면, 다음 링크버튼을 걸어 보여준다
+                $temp = $b_end_page+1;
+                echo "<font size=2><a href='togetherchallenge.php?page={$temp}&list={$list}&challengeselect={$challengeselect}&search={$search}&joinable={$joinable}'> 다음 </a></font>";
+            }
+        
+            // 마지막 링크 버튼
+            if($pageNum>=$total_page){
+                // 페이지넘버 = 총페이지
+                echo "<font size=2 color=red> [마지막] </font>";
+            }else{
+                //그게 아니라면
+                echo "<font size=2><a href='togetherchallenge.php?page={$total_page}&list={$list}&challengeselect={$challengeselect}&search={$search}&joinable={$joinable}'> [마지막] </a></font>";
+            }
         }
+
+
         }
             
         ?>
     </div>
-    
-    <!-- 페이지 번호 부분 -->
-    <?php         
-    //echo "pageNum=".$pageNum;
 
-                  
-    ?>
 
   
     

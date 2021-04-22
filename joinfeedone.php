@@ -21,6 +21,8 @@
 Include_once "db.php";
 Include_once "phpfunction.php";
 
+
+
 // get으로 받아온 챌린지 idx
 $shotidx = $_GET['shotidx'];
 
@@ -51,11 +53,11 @@ $src = $row['shot'];
         <!-- 날짜 -->
         <span class="right"><?php echo $date ?></span>
     </div>
-    <br><br>
+    <br>
 
     <!-- 챌린지명 -->
     <div id="challengetitle"> 
-        <span><?php echo $challengename ?></span>
+        챌린지 : <span><?php echo $challengename ?></span>
     </div>
 
     <hr>
@@ -67,6 +69,79 @@ $src = $row['shot'];
     <?php }else{//비디오 인증인 경우 ?>
     <video src="<?php echo $src ?>" controls>해당 브라우저는 video 태그를 지원하지 않습니다</video>
     <?php }  ?>
+    <br><br>
+
+    <!-- 하트 or 신고 -->
+    <div id="check">
+        <!-- 하트부분 -->
+        <span>        
+        <?php
+        /*
+        하트 체크 여부
+        */
+        $heartcheck = mq("select * from challengeshot_heart where idx={$shotidx} and user='{$_SESSION['user']}'");
+        // 값이 1 이상이라면 => 이미 하트를 누른 사용자
+        if(mysqli_num_rows($heartcheck)>=1){// 하트 체크 ok
+            $heartsrc = "./upload/shots/fill_heart.png";
+            $heartcheck = "1";
+            // 하트체크 input#heartcheck 값 =1  
+            echo"<script>
+                $('#heartcheck').val('1');
+            </script>";
+        }else{ // 하트 체크 no
+            $heartsrc = "./upload/shots/empty_heart.png";
+            $heartcheck = "0";
+            // 하트체크 input#heartcheck 값 = 0
+            echo"<script>
+            $('#heartcheck').val('0');
+            </script>";
+        }
+        ?>
+        <input type="hidden" id="heartcheck" value="<?php echo $heartcheck ?>">
+        <img id="jo_heart" src="<?php echo $heartsrc ?>">
+        
+
+        <!-- 하트수 -->
+        <?php
+        $hearttemp = "select * from challengeshot_heart where idx={$shotidx}";
+        $heartcount = mq($hearttemp);
+        $heartcount = mysqli_num_rows($heartcount);
+        ?>
+            <b id="shotheartcount"><?php echo $heartcount ?></b>
+        </span>
+
+        <!-- 신고부분 -->
+        <span>        
+        <?php
+        /*
+        신고 체크 여부
+        */
+        $sirencheck = mq("select * from challengeshot_siren where idx={$shotidx} and user='{$_SESSION['user']}'");
+        // 값이 1 이상이라면 => 이미 하트를 누른 사용자
+        if(mysqli_num_rows($sirencheck)>=1){// 사이렌 체크 ok
+            $sirensrc = "https://my3my3my.tk/challenger/upload/shots/fill_siren.png";
+            $sirencheck = "1";
+            // 사이렌체크 input#heartcheck 값 =1  
+        }else{ // 사이렌 체크 no
+            $sirensrc = "https://my3my3my.tk/challenger/upload/shots/empty_siren.png
+            ";
+            $sirencheck = "0";
+            // 하트체크 input#heartcheck 값 = 0
+        }
+        ?>
+        <input type="hidden" id="sirencheck" value="<?php echo $sirencheck ?>">
+        <img id="jo_siren" src="<?php echo $sirensrc ?>">
+        
+
+        <!-- 신고수 -->
+        <?php
+        $sirentemp = "select * from challengeshot_siren where idx={$shotidx}";
+        $sirencount = mq($sirentemp);
+        $sirencount = mysqli_num_rows($sirencount);
+        ?>
+            <b id="shotsirencount"><?php echo $sirencount ?></b>
+        </span>
+    </div>
 
     
 
@@ -157,77 +232,7 @@ $src = $row['shot'];
         </table>
     </div>
 
-    <!-- 하트 or 신고 -->
-    <div id="check">
-        <!-- 하트부분 -->
-        <span>        
-        <?php
-        /*
-        하트 체크 여부
-        */
-        $heartcheck = mq("select * from challengeshot_heart where idx={$shotidx} and user='{$_SESSION['user']}'");
-        // 값이 1 이상이라면 => 이미 하트를 누른 사용자
-        if(mysqli_num_rows($heartcheck)>=1){// 하트 체크 ok
-            $heartsrc = "https://challengersactivity.tk/challenger/upload/shots/20200712085440698d51a19d8a121ce581499d7b701668.png";
-            $heartcheck = "1";
-            // 하트체크 input#heartcheck 값 =1  
-            echo"<script>
-                $('#heartcheck').val('1');
-            </script>";
-        }else{ // 하트 체크 no
-            $heartsrc = "https://challengersactivity.tk/challenger/upload/shots/2020071208534242a0e188f5033bc65bf8d78622277c4e.png";
-            $heartcheck = "0";
-            // 하트체크 input#heartcheck 값 = 0
-            echo"<script>
-            $('#heartcheck').val('0');
-            </script>";
-        }
-        ?>
-        <input type="hidden" id="heartcheck" value="<?php echo $heartcheck ?>">
-        <img id="jo_heart" src="<?php echo $heartsrc ?>">
-        
 
-        <!-- 하트수 -->
-        <?php
-        $hearttemp = "select * from challengeshot_heart where idx={$shotidx}";
-        $heartcount = mq($hearttemp);
-        $heartcount = mysqli_num_rows($heartcount);
-        ?>
-            <b id="shotheartcount"><?php echo $heartcount ?></b>
-        </span>
-
-        <!-- 신고부분 -->
-        <span>        
-        <?php
-        /*
-        신고 체크 여부
-        */
-        $sirencheck = mq("select * from challengeshot_siren where idx={$shotidx} and user='{$_SESSION['user']}'");
-        // 값이 1 이상이라면 => 이미 하트를 누른 사용자
-        if(mysqli_num_rows($sirencheck)>=1){// 사이렌 체크 ok
-            $sirensrc = "https://challengersactivity.tk/challenger/upload/shots/20200712114339d1f491a404d6854880943e5c3cd9ca25.png";
-            $sirencheck = "1";
-            // 사이렌체크 input#heartcheck 값 =1  
-        }else{ // 사이렌 체크 no
-            $sirensrc = "https://challengersactivity.tk/challenger/upload/shots/20200712112039fa7cdfad1a5aaf8370ebeda47a1ff1c3.png
-            ";
-            $sirencheck = "0";
-            // 하트체크 input#heartcheck 값 = 0
-        }
-        ?>
-        <input type="hidden" id="sirencheck" value="<?php echo $sirencheck ?>">
-        <img id="jo_siren" src="<?php echo $sirensrc ?>">
-        
-
-        <!-- 신고수 -->
-        <?php
-        $sirentemp = "select * from challengeshot_siren where idx={$shotidx}";
-        $sirencount = mq($sirentemp);
-        $sirencount = mysqli_num_rows($sirencount);
-        ?>
-            <b id="shotsirencount"><?php echo $sirencount ?></b>
-        </span>
-    </div>
 </div>
 
 

@@ -1,5 +1,5 @@
 <?php
-    // db, phpfunction 파일 불러오기
+    // db, phpfunction 파일 불러오기.
     include "./db.php";
     include "./phpfunction.php";
 

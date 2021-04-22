@@ -1,8 +1,10 @@
 $(document).ready(function(){
+
+    // 어떤 데이터베이스에 저장할 것이지 : challengeshot_reply / challenge_reply
     var category = $("#category").val();
     console.log("카테고리="+category);
 
-    // 댓글입력버튼 -> 댓글 저장하고 -> 댓글을 붙여준다
+    // 댓글입력버튼 -> 댓글 저장하고 -> 댓글을 붙여준다 
     $("#replybutton").click(function(){
         // db에 저장할 데이터를 변수에 저장함 : 글번호, 댓글내용
         var bno = $("#idx").val(); // 글번호
@@ -37,6 +39,8 @@ $(document).ready(function(){
         if(confirmflag){// 확인버튼 -> true
             var thisvar = $(this);
             var number = thisvar.prev().prev().val();
+                // prev() = 이전요소
+                // .reply_num의 값이 나온다(댓글idx)
             console.log("삭제 될 댓글번호="+number);
 
             // 데이터베이스도 삭제하기

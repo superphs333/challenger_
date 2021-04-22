@@ -38,7 +38,7 @@ membercheck();
 </div>
 
 <!-- 
-    내용
+    내용(세션에 저장되어 있는 user가 join한 challenge들을 카테고리별로 나열)
 -->
 <?php
 $user = $_SESSION['user'];
@@ -221,19 +221,24 @@ if(!$sql){// 데이터베이스 가져오기 실패
                                     <span id="item_achievementrate">
                                     달성률 :
                                     <?php 
-                                    // 현재 올린 인증샷 갯수
+                                    /*
+                                    달성률 구하기 : (현재까지 올린 인증샷 갯수/총 필요한 인증샷 갯수)*100
+                                    */
+                                    // 현재 올린 인증샷 갯수(shotcount)
                                     $temppercent = "select * from challengeshot where challengeidx={$idx} and joiner='{$_SESSION['user']}' order by idx";
                                     $temppercent=mq($temppercent);
-                                    $shotcount=mysqli_num_rows($temppercent);
+                                    $shotcount=mysqli_num_rows($temppercent);// 현재까지 올린 인증샷 갯수
 
-                                    // 달성률 구하기
+
+                                    // 총 필요한 인증샷 갯수 
+                                        //=(한 주당 필요한 인증샷 갯수*하루 필요한 인증샷 갯수)*총 몇주
                                     // 총 몇 주인가?
-                                    $wholeweeks = datediff($startday,$endday)+1;
-                                    $wholeweeks = $wholeweeks/7;
-                                    // 총 필요한 인증샷 갯수 :(한 주당 필요한 인증샷 갯수*하루 필요한 인증샷 갯수)*총 몇주
+                                    $wholeweeks = datediff($startday,$endday)+1; // 기간차이
+                                    $wholeweeks = $wholeweeks/7; // 몇 주
                                     $requireshots = ($frequency*$proofshotcount)*$wholeweeks;
 
                                     // 만약 7일이하라면, 그 기간만큼 인증샷 있어야 함
+                                        //하루 필요한 인증샷 갯수 * 총 몇일
                                     if(datediff($startday,$endday)+1<7){
                                         $requireshots = $proofshotcount*(datediff($startday,$endday)+1);
                                     }
@@ -342,7 +347,7 @@ if($total_page>=2){
         // 페이지넘버 = 총페이지
         echo "<font size=2 color=red> [마지막] </font>";
     }else{
-        //그게 아니라면
+        //그게 아니라면 
         echo "<font size=2><a href='mychallengenote.php?page={$total_page}&list={$list}&join={$join}'> [마지막] </a></font>";
     }
 }

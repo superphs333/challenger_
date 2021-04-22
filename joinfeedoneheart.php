@@ -3,8 +3,8 @@
 include "./db.php";
 include "./phpfunction.php";
 
-// ajax로 받아온 정보 {shotidx:shotidx,check:check,category:category,sort:sort}
-$category = $_POST['category'];
+// ajax로 받아온 정보 {shotidx:shotidx,check:check,category:category,sort:sort} 
+$category = $_POST['category']; // 어떤 데이터베이스값 변경할지
 $check = $_POST['check'];
 $idx = $_POST['shotidx'];
 $sort = $_POST['sort'];
@@ -20,18 +20,18 @@ $temp = "INSERT INTO {$category}_{$sort}(idx,user) values('{$idx}','{$user}')";
 $sql = mq($temp);
 if(!$sql){ // 반영 실패
     echo mysqli_error($db);
-}else{ // 반영 성공 -> 북마크 수 반영
+}else{ // 반영 성공 -> 북마크/사이렌 수 반영
     $temp = "select * from {$category}_{$sort} where idx='{$idx}'";
     $sql = mq($temp);
 
     if(!$sql){ // sql 에러
         echo mysqli_error($db);
     }else{ // sql 에러x
-        // 현재 북마크 수
+        // 현재 북마크/사이렌 수
         $heartcount = mysqli_num_rows($sql);
         echo $heartcount;
 
-        if($category=="challengeshot" && $sort=="siren"){
+        if($category=="challengeshot" && $sort=="siren"){ // challengeshot의 report(신고수) 업데이트
 
 
             $temp = "UPDATE challengeshot set report={$heartcount} where idx={$idx}";
