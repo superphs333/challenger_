@@ -21,7 +21,7 @@
 Include "./top.php";
 ?>
 
-<!-- 챌린지 자체에 대한 설명 -->
+<!-- 챌린지 자체에 대한 설명 --> 
 <?php
     // 해당 파일 불러오기
     //$idx = $_GET['post']; 
@@ -146,6 +146,8 @@ $to_day = date($endday); // 종료일
 $today = strtotime($today); // 오늘
 $fromday = strtotime($fromday); // 시작일
 $to_day = strtotime($to_day); // 종료일
+
+
 if($today>=$fromday && $today<=$to_day ){// 인증가능 기간 ?>
 
 <?php
@@ -154,7 +156,7 @@ if($today>=$fromday && $today<=$to_day ){// 인증가능 기간 ?>
 // 오늘 날짜 
 //오늘 날짜 출력 ex) 2013-04-10 
 $Time = explode(" ",microtime()); 
-$s = mktime(0,0,0, date("m",$Time[1]), date("d",$Time[1]) - date("w",$Time[1]) +1/* 시작일 기준 */, date("Y",$Time[1]));
+$s = mktime(0,0,0, date("m",$Time[1]), date("d",$Time[1]) - date("w",$Time[1]) +1/* 시작일 기준 */, date("Y",$Time[1])); // 
 $e = mktime(0,0,0, date("m",$Time[1]), date("d",$Time[1]) - date("w",$Time[1]) +7/* 종료일 기준 */, date("Y",$Time[1]));
 $begin = date("Y-m-d", $s);
 $end = date("Y-m-d", $e);
@@ -181,18 +183,18 @@ $shotcountperweek = $frequency*$proofshotcount;
     <h3>오늘의 인증샷을 올려주세요</h3>
 <?php
 // 오늘의 인증샷을 담은 배열
-$shotarray = [];
-$detailarray = [];
-$shotidxarray = [];
+$shotarray = []; // 샷의 주소를 담는 배열
+$detailarray = []; // 샷의 자세한 설명을 담은 배열
+$shotidxarray = []; // 샷의 idx를 담는 배열
 $buttoname = ""; // 오늘날짜의 인증샷이 없으면 제출, 있으면 수정
 /*
 만약 인증시간이 아니라면, 인증샷을 올릴 수 있는 시간이 아닙니다.
 */ 
 // 현재시간
 //echo "현재 시간 : ". date("H:i")."<br/>";
-$nowtimestrtotime = strtotime(date("H:i"));
-$startstrtotime = strtotime($starttime);
-$endstrtotime = strtotime($endtime);
+$nowtimestrtotime = strtotime(date("H:i")); // 현재시간
+$startstrtotime = strtotime($starttime); // 시작시간
+$endstrtotime = strtotime($endtime); // 종료시간
 //echo "nowtimestrtotime=".$nowtimestrtotime." startstrtotime=".$startstrtotime." endstrtotime=".$endstrtotime;
 if($nowtimestrtotime<$startstrtotime){// 인증가능시간x?>
     <div>
@@ -218,15 +220,18 @@ if($nowtimestrtotime<$startstrtotime){// 인증가능시간x?>
                 while($shots=$fordaysql->fetch_array()){
                     // 인증샷 담기
                     $shot2 = $shots['shot'];
-                    $shotarray[] = $shot2;
+                    array_push($shotarray,$shot2);
+                    //$shotarray[] = $shot2;
 
                     // detail 담기
                     $detail2 = $shots['detail'];
-                    $detailarray[] = $detail2;
+                    array_push($detailarray,$detail2);
+                    //$detailarray[] = $detail2;
 
                     // idx 담기($shotidxarray)
                     $shotidx2 = $shots['idx'];
-                    $shotidxarray[] = $shotidx2;
+                    array_push($shotidxarray,$shotidx2);
+                    //$shotidxarray[] = $shotidx2;
                 }      
                 // 버튼이름 = 수정
                 $buttoname = "수정";
@@ -237,6 +242,7 @@ if($nowtimestrtotime<$startstrtotime){// 인증가능시간x?>
                 $buttoname = "제출";                
             } ?>  
             
+            <!-- 존재하고 있는 인증샷 셋팅 -->
             <?php
             for($i=1; $i<=$proofshotcount; $i++){
                 // 현재 존재하는 인증샷/디테일
@@ -275,6 +281,8 @@ if($nowtimestrtotime<$startstrtotime){// 인증가능시간x?>
 
         </tr>
     </table>
+
+
     <?php
     // 제출인 경우 => 두개의 이미지가 individualchallenge데이터베이스에 저장된다 -> 저장후에 인증샷 보드에 올라가게 됨
     // 수정인 경우  => 이미 올라간 이미지를 수정한다.
@@ -296,10 +304,11 @@ if($nowtimestrtotime<$startstrtotime){// 인증가능시간x?>
 <?php } ?>
 
 
+
 <hr>
 <!-- 인증샷 보드 -->
 <!-- 
-여지까지 올렸던 인증샷을 인스타그램 형식으로 보여준다.
+여지까지 올렸던 인증샷을 바둑판 형식으로 보여준다.
 부적합한 인증샷의 경우 부적합(빨간색)표시를 해줌 
 아래 날짜 표시
  -->
@@ -386,7 +395,7 @@ if(!$sql){ // 실패
                 $fit=$row['fit']; 
                 ?>
                 <?php
-                if($idx==""){?>
+                if($idx==""){ // 인증샷이 아직 등록되지 않음(근데 아래서 처리함..이 아래 else문)  ?> 
                     
                     <td class="shotitem" style="width:80px; word-break:reak-all">
                         <?php 
@@ -397,7 +406,7 @@ if(!$sql){ // 실패
                         
                         ?>                  
                         <!-- 날짜  -->
-                        <div><?php  echo $date; ?></div>
+                        <div><?php  echo $date ?></div>
                         <!-- 인증샷 or 동영상 -->
                         <img src="<?php echo $shot ?>">
                         <br>
@@ -441,6 +450,7 @@ if(!$sql){ // 실패
                     <br>
                     <!-- 자세한 설명 -->
                     <div><?php echo $detail; ?></div>
+                    
                     <!-- 적합성
                     fit = 1이면 파란색
                     fit = 0이면 빨간색

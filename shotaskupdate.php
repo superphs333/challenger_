@@ -33,7 +33,7 @@
     <h1>인증샷 문의</h1>
     <hr>
     
-    <form action="shotaskupdate_ok.php" method="post">
+    <form id="shot_ask_update_form" action="shotaskupdate_ok.php" method="post">
         <!-- 개설 부분 -->
         <table id="shotask">
 

@@ -9,14 +9,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<!-- 외부 css 불러오기 -->
+<!-- 외부 css 불러오기 --> 
 <link rel="stylesheet" type="text/css" href="./whole.css" />
 
 </head>
 <body>
 <!-- 
     분류
-    : 신고 된 챌린지만/ 미완료 챌린지만
+    : 신고 된 챌린지만/ 미완료 챌린지만 
 
     순서
     : 신고 많은 순, 마감일 순, 챌린지별로 보기
@@ -28,11 +28,6 @@
     <!-- 처리 완료 된 챌린지만 보기 -->
     <input id="siren" type="checkbox" value="yes" >신고 된 인증샷만 보기
     <br>
-
-    <!-- 
-        검색 : 유저
-    -->
-    
 
     <!-- 순서 -->
     <select id="shotmanagementorderby">
@@ -55,11 +50,9 @@
     $temp = "select c.title,c.additionaldescription,c.video,cs.shot,cs.challengeidx,cs.idx,cs.joiner,cs.fit,c.endday,c.startday,cs.handleok,cs.report from challengeshot as cs left join challenge as c on cs.challengeidx=c.idx where date_add(c.endday,INTERVAL 21 day)>now() ";
 
     // 미완료 처리만
-
     $handleok2 = $_GET['handleok2'];
     //ECHO $handleok."</br>";
     if($handleok2=="0"){ // 미완료 된 처리
-
         $handletemp = " and cs.handleok='0' ";
         $temp = $temp.$handletemp;
     }
@@ -87,6 +80,8 @@
 
     $sql = mq($temp);
 
+    
+
     /*
     페이징
     */
@@ -96,7 +91,7 @@
      // page값을 받아서, 있다면 그대로 $_GET['page'] 값을 사용하고,비어있다면1로 값을 지정하는 조건문
 
     // 한 페이지에 몇 개의 글을 보여줄지 
-    $list=($_GET['list']?$_GET['list']:4);
+    $list=($_GET['list']?$_GET['list']:5);
         // page default = 50
         // 한 페이지에 50개의 글 목록
     
@@ -150,7 +145,6 @@
             </thead>
             <?php
             while($row = $sql->fetch_array()){ 
-
             /*
             정보 가져오기
             */
@@ -216,7 +210,6 @@
                         <input type="checkbox"  name="box[]" class="shot_checkbox" <?php
                          if($handleok=="1"){echo "checked";}
                          ?> value="<?php echo $idx?>">
-
                     </td>
                 </tr>
             </tbody>
@@ -230,7 +223,7 @@
         <br>
     <?php } ?>
                    
-    <div style="text-align:center" <?php if($total_page<=1){echo "hidden";} ?> >
+    <div style="text-align:center" <?php if($total_rows==0){echo "hidden";} ?> >
     <?php
     
     // 페이징

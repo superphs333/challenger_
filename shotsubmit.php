@@ -1,5 +1,5 @@
 <?php
-include "db.php";
+include "db.php"; 
 
 // 받아온 값 : {idx:idx,textstring:textstring,imgsrcarr:imgsrcarr,dates:dates,fits:fits,videocheck:videocheck}
 $idx = $_POST['idx'];
@@ -29,7 +29,7 @@ if($bigorder==""){
     $bigorder = $bigorder+1;
     echo "bigorder=".$bigorder;
 }
-
+ 
 
 
 /*

@@ -86,7 +86,7 @@
     // page값을 받아서, 있다면 그대로 $_GET['page'] 값을 사용하고,비어있다면1로 값을 지정하는 조건문
 
     // 한 페이지에 몇 개의 글을 보여줄지 
-    $list=($_GET['list']?$_GET['list']:4);
+    $list=($_GET['list']?$_GET['list']:10);
         // page default = 50
         // 한 페이지에 50개의 글 목록
     
@@ -97,7 +97,7 @@
     $block = ceil($pageNum/$b_pageNum_list);
     //echo $block;
 
-    // 현재 블럭에서 시작페이지 번호
+    // 현재 블럭에서 시작페이지 번호 
     $b_start_page = (($block-1)*$b_pageNum_list)+1;
     //echo $b_start_page; 
 
@@ -123,7 +123,7 @@
         <div style="text-align:center" <?php if($total_rows!=0){echo "hidden";} ?>>
         데이터가 존재하지 않습니다
         </div>
-        <table  <?php if($total_rows==0){echo "hidden";} ?>>
+        <table id="refund_table"  <?php if($total_rows==0){echo "hidden";} ?>>
             <thead>
                 <tr>
                     <th>번호</th>                    
@@ -147,9 +147,9 @@
             $fit = $row['fit']; // 수락or거절
             ?>
             <tbody>
-                <tr>
+                <tr class="refund_table_item">
                     <!-- 환불번호 -->
-                    <td>
+                    <td class="refund_table_item_refund">
                         <?php echo $idx ?>
                     </td>
 
@@ -164,10 +164,11 @@
                     : (관리자용)유저의 개인 readpage로 이동
                     = challengeindividualmanagement.php?idx=챌린지명&user=유저
                     -->
-                    <td>            
-                        <a
-                        onclick="window.open('challengeindividualmanagement.php?idx=<?php echo $challengeidx ?>&user=<?php echo $user ?>&refund=<?php echo $idx ?>','width=200px,height=200px,toolbars=no,scrollbars=no')"
-                        >유저 챌린지 페이지</a>
+                    <td>      
+                        <!-- <a
+                        onclick="window.open('challengeindividualmanagement.php?idx=<?php echo $challengeidx ?>&user=<?php echo $user ?>&refund=<?php echo $idx ?>','_black','width=700,height=500px,toolbars=no,scrollbars=no')"
+                        >유저 챌린지 페이지</a> -->
+                        <a>유저챌린지 페이지</a>
                     </td>
 
                     <!-- 주문번호 -->
@@ -179,7 +180,7 @@
                         수락 or 거절
                         : 
                     -->
-                    <td>
+                    <td class="refund_table_item_status">
                     <?php
                     if($fit==null){ // 널인 상태
                         echo "대기";

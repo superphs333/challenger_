@@ -1,6 +1,6 @@
 
 <html>
-<head>
+<head> 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,7 +63,7 @@
 
   <div id="shotask" class="w3-container city">
     <h2>인증샷 문의</h2>
-    <p>내가 보낸 인증샷 항의?????</p>
+    <!-- <p>내가 보낸 인증샷 항의</p> -->
     <?php Include "myshotask.php" ?> 
   </div>
 

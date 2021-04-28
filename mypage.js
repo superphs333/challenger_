@@ -18,7 +18,7 @@ $(document).ready(function(){
         openCity($("#heartshotlink").event,"heartshot");
     }else if(mypage=="refund"){
         openCity($("#heartshotlink").event,"heartshot");
-    }
+    } 
 
     /*
     닉네임 변경
@@ -257,7 +257,7 @@ $(document).ready(function(){
     $("#askok_myask").change(function(){
         var askok;
 
-        if($(this).is(":checked")){
+        if($(this).is(":checked")){ // 체크된 상태라면
             console.log("답변 된 질문만 보기 체크");
             askok = "1"; // 이렇게 처리되어 있는 값만 가져오기
         }
@@ -317,7 +317,6 @@ $(document).ready(function(){
     /*
     mybookmark.php
     */
-    
     $("#joinable").change(function(){
 
         // 현재 상태

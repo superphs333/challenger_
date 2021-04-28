@@ -4,7 +4,7 @@
 </head>
 <body>
 <!-- 선택 -->
-<div id="sort">
+<div id="sort"> 
     <!-- 참여가능한 이벤트만 보기 -->
     <input id="joinable" type="checkbox" value="yes" <?php if($_GET['joinable']=="1"){echo "checked";} ?>>참여 가능한 이벤트만 보기
 </div>
@@ -30,7 +30,7 @@ $total_rows = $count;
 // 페이지 번호
 $pageNum=($_GET['page'])?$_GET['page']:1;
 // 한 페이지에 몇 개의 글을 보여줄지 
-$list=($_GET['list']?$_GET['list']:3);
+$list=($_GET['list']?$_GET['list']:9);
 //블럭에 나타낼 페이지 번호 갯수
 $b_pageNum_list = 4;
 // 현재 리스트의 블럭을 구함

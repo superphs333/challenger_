@@ -110,13 +110,13 @@
         $membersort = $forsort['sort'];
         //echo $membersort;
 
-        if($membersort!="staff"){
-            //echo "권한없음";
-            echo"<script>
-            alert('권한없는 페이지 입니다');
-            history.back();
-            </script>";
-        }
+        // if($membersort!="staff"){
+        //     //echo "권한없음";
+        //     echo"<script>
+        //     alert('권한없는 페이지 입니다');
+        //     history.back();
+        //     </script>";
+        // }
     }
 
     function membercheck(){

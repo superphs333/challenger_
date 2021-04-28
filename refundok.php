@@ -9,7 +9,7 @@ $sort = $_POST['sort'];
 // 위 IDX값을 통해, refund fix값 고치기
 if($sort=="수락"){
     $fit = 1;
-}else if($sort=="거절"){
+}else if($sort=="거절"){ 
     $fit = 0;
 }
 

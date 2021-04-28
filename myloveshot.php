@@ -4,7 +4,7 @@
 </head>
 <body>
 <?php
-// 좋아요 한 챌린지 불러오기 => chalenge + challengeshot_heart
+// 좋아요 한 챌린지 불러오기 => chalenge + challengeshot_heart 
 $temp = "select * from challengeshot as cs left join challengeshot_heart as ch on cs.idx=ch.idx where ch.user='{$_SESSION['user']}' ";
 //echo $temp;
 $sql = mq($temp);
@@ -18,7 +18,7 @@ $total_rows = $count;
 // 페이지 번호
 $pageNum=($_GET['page'])?$_GET['page']:1;
 // 한 페이지에 몇 개의 글을 보여줄지 
-$list=($_GET['list']?$_GET['list']:3);
+$list=($_GET['list']?$_GET['list']:9);
 //블럭에 나타낼 페이지 번호 갯수
 $b_pageNum_list = 4;
 // 현재 리스트의 블럭을 구함

@@ -41,6 +41,7 @@ membercheck();
     내용(세션에 저장되어 있는 user가 join한 challenge들을 카테고리별로 나열)
 -->
 <?php
+
 $user = $_SESSION['user'];
 // join_challenge의 idx값 = challenge의 idx값이 같은 것
 $temp = "SELECT c.idx,c.thumbnail,c.title,c.sort,c.startday,c.endday,c.frequency,c.proofshotcount,c.starttime,c.endtime from challenge as c left join challenge_join as cj on c.idx=cj.idx where cj.user='{$user}'";

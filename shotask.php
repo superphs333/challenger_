@@ -1,7 +1,7 @@
 
 <html>
 <head>
-    <!-- 외부 css 불러오기 -->
+    <!-- 외부 css 불러오기 --> 
     <link rel="stylesheet" type="text/css" href="./whole.css" />
 </head>
 <body>

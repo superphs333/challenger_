@@ -44,7 +44,7 @@
             // page값을 받아서, 있다면 그대로 $_GET['page'] 값을 사용하고,비어있다면1로 값을 지정하는 조건문
 
         // 한 페이지에 몇 개의 글을 보여줄지 
-        $list=($_GET['list']?$_GET['list']:2);
+        $list=($_GET['list']?$_GET['list']:10);
             // page default = 50
             // 한 페이지에 50개의 글 목록
         
@@ -133,7 +133,6 @@
                 </td>
 
                 <!-- 답변 -->
-                
                 <td>
                     <?php
                     $url = "shotaskread.php?idx={$idx}&challengeshotidx={$challengeshotidx}";      

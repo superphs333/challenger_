@@ -1,12 +1,12 @@
 $(document).ready(function(){
 
 
-    // 구분
+    // 구분 
     var management = getParameterByName("management");
     if(management=="" || management=="shotmanagement"){
         openCity($("#shotmanagementlink").event,"shotmanagement");
     }else if(management=="shotask"){
-        openCity($("#shotasklink").event,"shotask");
+        openCity($("#shotasklink").event,"shotask"); 
     }else if(management=="refund"){
         openCity($("#refund").event,"refund");
     }
@@ -224,6 +224,7 @@ $(document).ready(function(){
         var send_cnt = 0;
         var chkbox = $(".shot_checkbox");
 
+        // 체크값 전송하기
         for(i=0;i<chkbox.length;i++){
             if(chkbox[i].checked==true){
                 send_array[send_cnt] = chkbox[i].value;
@@ -308,6 +309,26 @@ $(document).ready(function(){
 
         // 페이지 이동
         location.href = 'challengemanagement.php?refundfit=' + refundfit+"&refundorder="+refundorder+"&page="+1+'&management=refund';
+    });
+
+
+    // 처리완료 표시
+    $("#refund_table").on("click","tbody .refund_table_item",function(){
+        console.log("수락/거절 페이지 이동");
+
+        // 인덱스
+        var index = $(".refund_table_item").index(this);
+        console.log("인덱스="+index);
+
+        // shot 번호
+        // var idx = $(".shotidx").eq(index).text();
+        // console.log("shot번호="+idx);
+
+        // idx 값(refund)
+        var refund_idx = $(".refund_table_item_refund").eq(index).text().trim();
+        console.log("refund_idx="+refund_idx);
+        
+        window.open("./challengeindividualmanagement.php?refund="+refund_idx+"&position="+index,"_blank",'width=700,height=500px,toolbars=no,scrollbars=no');
     });
 
 });

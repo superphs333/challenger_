@@ -1,6 +1,9 @@
 //Jquery 화면을 불러오자마자 실행
 $(document).ready(function () {
 
+
+    // 부모창에서 클릭한 tr의 position
+    var position = $("#position").val();
    
 
     // refundidx 받아오기
@@ -28,6 +31,17 @@ $(document).ready(function () {
           url:"./refundok.php",
           success : function(echo){
               console.log(echo);
+
+              $(".refund_table_item_status",parent.opener.document).eq(position).text(sort);
+
+              // 부모창(id=tempemail)값 변경
+              //$("#change2",parent.opener.document).text("이메일이 인증되었습니다");
+
+              // 값을 방아서 -> 부모페이지에도 적용 (수락/거절)
+              //window.opener.document.getElementById("change2").text = "테스트";
+             //$(opener.document).find("#change2").val("테스트");
+
+             location.reload();
           }
       });
 

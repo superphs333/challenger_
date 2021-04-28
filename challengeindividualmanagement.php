@@ -1,7 +1,7 @@
 
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bootstrap 101 Template</title>
@@ -27,9 +27,18 @@ onlyadmin();
 <?php
     // 해당 파일 불러오기
     //$idx = $_GET['post']; 
-    $idx=$_GET['idx']; // 챌린지 idx
-    $user = $_GET['user']; // 유저
+    // $idx=$_GET['idx']; // 챌린지 idx
+    // $user = $_GET['user']; // 유저
     $refundidx = $_GET['refund']; // 환급번호 idx
+    $position = $_GET['position']; // 부모창 클릭한 위치
+
+
+    // 환급번호로 챌린지idx, user알아내기
+    $for_info_temp = "select challengeidx, user from refund where idx={$refundidx}";
+    $sql_info = mq($for_info_temp);
+    $result_info = $sql_info->fetch_array();
+    $idx = $result_info['challengeidx'];
+    $user = $result_info['user'];
 
 
     // 데이터베이스 불러오기
@@ -57,7 +66,8 @@ onlyadmin();
     $endtime = $sql['endtime']; // 인증 끝 시간
 ?>
 <input type="hidden" id="participant" value="<?php echo $user ?>">
-<input type="hidden" id="idx2" value="<?php echo $idx ?>">
+<input type="hidden" id="participant" value="<?php echo $user ?>">
+<input type="hidden" id="position" value="<?php echo $position ?>">
 <!-- 내용 -->
 <div id="cr_content">
     <img src="<?php echo $thumbnail ?>">
@@ -299,7 +309,7 @@ if($forfit=="1"){
 }
 ?>
 <div style="text-align:center"><?php echo $fitstatus ?></div>
-<div style="text-align:center" <?php if($forfit=="1" || $forfit=="0"){echo "hidden";} ?>>
+<div style="text-align:center" >
     <input id="refundidx" type="hidden" value="<?php echo $refundidx ?>">
     <!-- merchant_uid -->
     <?php 

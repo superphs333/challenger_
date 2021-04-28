@@ -1,4 +1,4 @@
-//Jquery 화면을 불러오자마자 실행 
+//Jquery 화면을 불러오자마자 실행  
 $(document).ready(function () {
     console.log("challengeindividualread.js시작");
 
@@ -37,6 +37,7 @@ $(document).ready(function () {
         var imgsrcarr = new Array();
         for (var i = 0; i < itemcount; i++) {
             imgsrcarr[i] = $('.shotimg').eq(i).attr("src");
+                // eq() = 선택한 요소의 인덱스 번호에 해당하는 요소를 찾는다
         }
 
         // (3) text의 src를 배열에 담기
@@ -163,6 +164,7 @@ $(document).ready(function () {
         // 만약 부적합 판정받은 인증샷이라면
         var fitinfo = $(".fitinfo").eq(index).val();
         console.log("fitinfo="+fitinfo);
+        
         if(fitinfo=="0"){ // 부적합 판정 인증샷
 
             // 이미 문의한 인증샷이라면, 경고창
@@ -262,7 +264,7 @@ function handleImgFileSelect(e, index) {
                 return;
             }
         }else{
-            console.log("동영상인증인 경우");
+            console.log("동영상인증인 경우"); 
             // 이미지 확장자만 가능하도록 한다
             if (!f.type.match("video.*")) {
                 alert("확장자는 동영상 확장자만 가능합니다.");

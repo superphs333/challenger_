@@ -4,27 +4,23 @@
 
 </head>
 <body>
-    <!-- 분류 -->
+    <!-- 분류 --> 
     <div id="shotask_sort" style="top-margin:10px; bottom-margin:10px">
-        <!-- 답변완료 된 문의 보기 -->
+        <!-- 
+            답변완료 된 문의 보기 
+            : $_GET['askok']=="1" 인 경우에는 체크박스에 체크표시해줌
+        -->
         <input id="askok_myask" type="checkbox" value="yes" <?php if($_GET['askok']=="1"){echo "checked";} ?> >완료 답변만 보기
     </div>
 
     <table id="myshotasktable">
-        <thead>
-            <tr>
-                <th>문의번호</th>
-                <th>인증샷</th>
-                <th>챌린지명</th>
-                <th>내용</th>
-                <th>답변여부</th>
-                <th>수정/삭제</th>
-            </tr>
-        </thead>
+
         <?php
 
+        // 로그인한 회원의 shotask를 모두 가져온다
         $temp = "select * from shotask where user='{$_SESSION['user']}'";
 
+        // 만약 askok표시가 1이라면(답변완료된문의만) => answer(답변완료 true/false) 1인 게시물만 보이도록
         if($_GET['askok']=="1"){
             $temp = "select * from shotask where user='{$_SESSION['user']}' and answer='1'";
         }
@@ -40,7 +36,7 @@
         // page값을 받아서, 있다면 그대로 $_GET['page'] 값을 사용하고,비어있다면1로 값을 지정하는 조건문
 
         // 한 페이지에 몇 개의 글을 보여줄지 
-        $list=($_GET['list']?$_GET['list']:1);
+        $list=($_GET['list']?$_GET['list']:5);
             // page default = 50
             // 한 페이지에 50개의 글 목록
         
@@ -70,6 +66,23 @@
         $start_record = ($pageNum-1)*$list;
 
         $sql = mq($temp." limit {$start_record},{$list}");
+
+        if($total_rows>=1){ // 값이 있는 경우
+            echo <<<HTML
+        <thead>
+            <tr>
+                <th>문의번호</th>
+                <th>인증샷</th>
+                <th>챌린지명</th>
+                <th>내용</th>
+                <th>답변여부</th>
+                <th>수정/삭제</th>
+            </tr>
+        </thead>
+HTML;
+        }else{ // 값이 없는 경우
+            echo "<div style='text-align:center'>문의한 인증샷이 없습니다</div>";
+        }
 
         while($row = $sql->fetch_array()){ 
 
@@ -157,61 +170,67 @@
 
     <!-- 페이징 -->
     <?php
-        if($pageNum<=1){//페이지번호가 1보다 작거나 같다면
 
-            echo "<font size=2 color=red> [처음] </font>";
-                // 링크없이 그냥 처음이라는 문자만 출력
-        }else{ // 1보다 크다면
-    
-            echo "<font size=2><a class='pagelink' href='mypage.php?page=&list={$list}&askok={$askok}&mypage=shotask'> [처음] </a></font>";
         
-        }
+        if($total_rows>=1){ // 총 갯수가 1이상일때만 처음, 마지막, 페이지 보이도록 한다
+            if($pageNum<=1){//페이지번호가 1보다 작거나 같다면
+
+                echo "<font size=2 color=red> [처음] </font>";
+                    // 링크없이 그냥 처음이라는 문자만 출력
+            }else{ // 1보다 크다면
         
-        if($block<=1){
+                echo "<font size=2><a class='pagelink' href='mypage.php?page=&list={$list}&askok={$askok}&mypage=shotask'> [처음] </a></font>";
             
-            // block이 1보다 작거나 같다면 , 더 이상 거꾸로 갈 수 없으므로 아무 표시도 하지 않는다.
-            echo "<font></font>";
-        }else{  
-            $insertpage = $b_start_page-1;
-            echo "<font size=2><a class='pagelink' href='mypage.php?page={$insertpage}&list={$list}&askok={$askok}&mypage=shotask'> 이전 </a></font>";
-        }
-        
-        for($j=$b_start_page; $j<=$b_end_page; $j++){
-            if($pageNum==$j){
-               
-                // pageNum=j이면, 현재 페이지이므로,링크걸지않고 그냥 현재 페이지만 출력
-                echo "<font class='pagelink' size=2 color=red> {$j} </font>";
-            }else{
-               
-                echo"<font size=2><a class='pagelink' href='mypage.php?page={$j}&list={$list}&askok={$askok}&mypage=shotask'> {$j} </a></font>";
-                    // 현재 페이지를 제외한 나머지 페이지 번호를 링크를 달아 출력하기
-    
-                    
             }
             
-        }
-    
-        // 블럭의 총 갯수
-        $total_block = ceil($total_page/$b_pageNum_list);
-    
-        if($block>=$total_block){
+            if($block<=1){
+                
+                // block이 1보다 작거나 같다면 , 더 이상 거꾸로 갈 수 없으므로 아무 표시도 하지 않는다.
+                echo "<font></font>";
+            }else{  
+                $insertpage = $b_start_page-1;
+                echo "<font size=2><a class='pagelink' href='mypage.php?page={$insertpage}&list={$list}&askok={$askok}&mypage=shotask'> 이전 </a></font>";
+            }
             
-            // block과 총block의 갯수가 값이 같다면, 맨 마지막 블록이므로 다음 링크버튼이 필요없어 보여주지 않는다.
-            echo "<font></font>";
-        }else{
-            // 그게아니라면, 다음 링크버튼을 걸어 보여준다
-            $temp = $b_end_page+1;
-            echo "<font size=2><a class='pagelink' href='mypage.php?page={$temp}&list={$list}&askok={$askok}&mypage=shotask'> 다음 </a></font>";
+            for($j=$b_start_page; $j<=$b_end_page; $j++){
+                if($pageNum==$j){
+                   
+                    // pageNum=j이면, 현재 페이지이므로,링크걸지않고 그냥 현재 페이지만 출력
+                    echo "<font class='pagelink' size=2 color=red> {$j} </font>";
+                }else{
+                   
+                    echo"<font size=2><a class='pagelink' href='mypage.php?page={$j}&list={$list}&askok={$askok}&mypage=shotask'> {$j} </a></font>";
+                        // 현재 페이지를 제외한 나머지 페이지 번호를 링크를 달아 출력하기
+        
+                        
+                }
+                
+            }
+        
+            // 블럭의 총 갯수
+            $total_block = ceil($total_page/$b_pageNum_list);
+        
+            if($block>=$total_block){
+                
+                // block과 총block의 갯수가 값이 같다면, 맨 마지막 블록이므로 다음 링크버튼이 필요없어 보여주지 않는다.
+                echo "<font></font>";
+            }else{
+                // 그게아니라면, 다음 링크버튼을 걸어 보여준다
+                $temp = $b_end_page+1;
+                echo "<font size=2><a class='pagelink' href='mypage.php?page={$temp}&list={$list}&askok={$askok}&mypage=shotask'> 다음 </a></font>";
+            }
+        
+            // 마지막 링크 버튼
+            if($pageNum>=$total_page){
+                // 페이지넘버 = 총페이지
+                echo "<font size=2 color=red> [마지막] </font>";
+            }else{
+                //그게 아니라면
+                echo "<font size=2><a class='pagelink' href='mypage.php?page={$total_page}&list={$list}&askok={$askok}&mypage=shotask'> [마지막] </a></font>";
+            }
         }
-    
-        // 마지막 링크 버튼
-        if($pageNum>=$total_page){
-            // 페이지넘버 = 총페이지
-            echo "<font size=2 color=red> [마지막] </font>";
-        }else{
-            //그게 아니라면
-            echo "<font size=2><a class='pagelink' href='mypage.php?page={$total_page}&list={$list}&askok={$askok}&mypage=shotask'> [마지막] </a></font>";
-        }
+
+
     ?>
 
 </html>

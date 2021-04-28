@@ -44,6 +44,8 @@
     
                 echo $destination;  // 경로명 출력
                     // ./upload/cwupload/20200627080641.jpg
+            }else{
+                // 파일 에러 존재
             }
         }
   
