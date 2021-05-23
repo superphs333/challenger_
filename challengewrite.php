@@ -111,7 +111,11 @@
             <td class="content"><textarea id="summernote"></textarea></td>
         </tr>
     </table>
-    <button id="cw_submit">개설하기</button>
+    <div></div>
+    <center><button id="cw_submit">개설하기</button></center>
+    
+ 
+    
     
 
     <!-- 제이쿼리 -->

@@ -46,6 +46,8 @@
 
     <hr>
     <a href="logout.php">로그아웃</a>
+    <a onclick="openCity(event, 'withdrawl')">회원탈퇴</a>
+
 </nav>
 
 <div style="margin-left:130px;">
@@ -97,18 +99,41 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script>
 function openCity(evt, cityName) {
-  var i, x, tablinks;
-  x = 
-  document.getElementsByClassName("city");
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" w3-red", ""); 
-  }
-  document.getElementById(cityName).style.display="block";
-  //evt.currentTarget.className += " w3-red";
+
+    if(cityName=="withdrawl"){
+        console.log("회원탈퇴 클릭");
+        var result = confirm("정말로 회원탈퇴 하시겠습니까?");
+
+        if(result==true){
+            // 페이지 이동
+            location.href='./withdrawal.php';
+        }
+    }
+
+
+    var i, x, tablinks;
+    x = 
+    document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" w3-red", ""); 
+    }
+    document.getElementById(cityName).style.display="block";
+    //evt.currentTarget.className += " w3-red";
+
+    /*
+    주소변경
+    */
+   // 현재주소
+   var renewURL = location.href;
+   // 이동할 주소
+   renewURL = "https://my3my3my.tk/challenger/mypage.php?mypge="+cityName;
+    // url주소 변경
+    window.history.pushState(null,null,renewURL);
+
 }
 </script>
 <!-- 자바스크립트 -->

@@ -63,10 +63,10 @@
                 if($_SESSION['user']=="admin@challenger.com"){?>
                     <li><a href="challengemanagement.php">관리페이지</a></li>
                 <?php } ?>    
-                <?php 
+                <!-- <?php 
                 if($_SESSION['user']!=""){?>
                     <li><a href="https://13.209.234.165:3000/?name=<?php echo $nickname ?>">채팅</a></li> 
-                <?php } ?> 
+                <?php } ?>  -->
                                  
             </ul>
         </div>

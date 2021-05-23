@@ -2,6 +2,15 @@ $(document).ready(function(){
     var category = $("#category").val();
     console.log("카테고리="+category);
 
+    // 멤버인지 확인
+    var member_chk;
+    if($("#participant").val()==""){
+        member_chk = false;
+    }else{
+        member_chk = true;
+    }
+    //console.log("member_chk="+member_chk);
+
     /*
     for 결제
     */
@@ -21,12 +30,18 @@ $(document).ready(function(){
     // 글번호
     var idx = $("#idx2").val();
 
-    // 묵마크 체크 확인
+    // 북마크 체크 확인
     console.log($('#bookmarkcheck').val());
     
     // 북마크 체크 버튼 -> 클릭하면 색 반전
     $("#cr_bookmark").click(function(){
         console.log("북마크 체크 버튼 누름");
+
+        if(member_chk==false){
+            alert("로그인 및 회원가입을 해야 이용가능합니다");
+            return;
+        }
+
         /*
         데이터베이스 값 변화
         - 필요 => 글번호, bookmarkcheck.var
@@ -76,6 +91,11 @@ $(document).ready(function(){
     $("#cr_join").click(function(){
         console.log("참여하기 버튼 누름");
 
+        if(member_chk==false){
+            alert("로그인 및 회원가입을 해야 이용가능합니다");
+            return;
+        }
+        
         // 만약, 참여가능하지 않는 경우라면, 참여하지 못하도록 하기
         var joinable = $("#joinable").val();
         console.log(joinable);

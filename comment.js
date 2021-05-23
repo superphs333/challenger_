@@ -4,8 +4,22 @@ $(document).ready(function(){
     var category = $("#category").val();
     console.log("카테고리="+category);
 
+    // 멤버인지 확인
+    var member_chk;
+    if($("#participant").val()==""){
+        member_chk = false;
+    }else{
+        member_chk = true;
+    }
+
     // 댓글입력버튼 -> 댓글 저장하고 -> 댓글을 붙여준다 
     $("#replybutton").click(function(){
+
+        if(member_chk==false){
+            alert("로그인 및 회원가입을 해야 이용가능합니다");
+            return;
+        }
+
         // db에 저장할 데이터를 변수에 저장함 : 글번호, 댓글내용
         var bno = $("#idx").val(); // 글번호
         var content = $("#replyinput").val(); // 댓글내용

@@ -251,8 +251,16 @@ if($nowtimestrtotime<$startstrtotime){// 인증가능시간x?>
                 $todayidx = $shotidxarray[$i-1];
             ?>
                 <td>
-                    <input type="file" class="shotfile">
+                
                     <?php
+
+                    // 사진 or 동영상
+                    if($videocheck=="사진인증"){
+                        echo "<input type='file' accept='image/*' class='shotfile'>";
+                    }else{
+                        echo "<input type='file' accept='video/*' class='shotfile'>";
+                    }
+
                     if($videocheck=="사진인증"){
                         if($todaysrc!=null){ // 이미지 src가 null이 아닌 경우
                             echo "<img class='shotimg' src='{$todaysrc}' >";

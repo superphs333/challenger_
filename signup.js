@@ -331,7 +331,7 @@ function EmailJS(emailforid, from_name, message_html) {
             message_html: message_html
         }
         emailjs.init("user_Hxl2f3zXlrmUpqReFkyIK");
-        emailjs.send("superphs1214_gmail_com", "template_woxdz8Hj", emailC)
+        emailjs.send("service_kkmiqh6", "template_woxdz8Hj", emailC)
             .then(function (response) {
                 console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
                 //alert("이메일이 전송 되었습니다.");

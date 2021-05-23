@@ -30,7 +30,7 @@ onlyadmin();
     // $idx=$_GET['idx']; // 챌린지 idx
     // $user = $_GET['user']; // 유저
     $refundidx = $_GET['refund']; // 환급번호 idx
-    $position = $_GET['position']; // 부모창 클릭한 위치
+    $position = $_GET['position']; // 부모창 클릭한 위치 
 
 
     // 환급번호로 챌린지idx, user알아내기

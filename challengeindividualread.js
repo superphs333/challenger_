@@ -21,6 +21,9 @@ $(document).ready(function () {
     $("#shotsubmit").click(function () {
         console.log("인증샷 제출 버튼");
 
+        
+        
+
         //////////////////////////////////////////////////
 
         // 포함되어야 할 정보 : 글번호, 인증샷, 인증샷 설명
@@ -38,7 +41,16 @@ $(document).ready(function () {
         for (var i = 0; i < itemcount; i++) {
             imgsrcarr[i] = $('.shotimg').eq(i).attr("src");
                 // eq() = 선택한 요소의 인덱스 번호에 해당하는 요소를 찾는다
+
+            // 만약 공백이면 빠져나오기
+            if(imgsrcarr[i] == "" || imgsrcarr[i] == null){
+                alert("제출하신 인증샷 갯수를 확인해주세요");
+                return;
+            }
+            console.log(imgsrcarr[i]);
         }
+
+
 
         // (3) text의 src를 배열에 담기
         var text = new Array();

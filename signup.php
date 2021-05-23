@@ -14,6 +14,7 @@
 
 
     <body>
+        <?php include_once "top.php" ?>
         <div id="inp"></div>
         <article class="container">
             <div class="page-header">
@@ -29,7 +30,7 @@
 
                         <!-- 이메일 -->
                         <div class="form-group">
-                            <lable for="InputEmail">이메일 주소</lable>
+                            <lable for="InputEmail"><b>이메일 주소</b></lable>
                             <input type="email" class="form-control" id="signup_InputEmail" placeholder="이메일 주소를 입력해주세요" name="email" required>
                             <button id="signup_chkbtn" style="margin-top:3px;">이메일 인증</button>
                             <!-- 임시문자 -->
@@ -44,7 +45,8 @@
                         <div id="nickduplicatechkwords">
                         </div>
                         <!-- 닉네임 중복체크 버튼 -->
-                        <button id="signup_ckbtn">중복체크</button>
+                        <button id="signup_ckbtn" style="margin-top:3px;">중복체크</button>
+                        </br></br>
 
                         <!-- 비밀번호 -->
                         <div class="form-group">

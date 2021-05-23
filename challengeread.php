@@ -96,7 +96,7 @@
                 </td>
             </tr> -->
             <tr>
-                <td>인증 가능 시간 : </td>
+                <td>인증 가능 시간 : </td> 
                 <td>
                 <?php
                 echo $starttime."~".$endtime;

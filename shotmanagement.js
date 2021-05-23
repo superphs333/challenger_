@@ -213,7 +213,7 @@ $(document).ready(function(){
                 }
             }
         });
-    });
+    }); 
 
     // 처리완료 표시
     $("#shotmanagement_shots").on("click","#handleok",function(){

@@ -1,6 +1,14 @@
 $(document).ready(function(){
     var category = $("#category").val();
-    console.log("카테고리="+category);
+    console.log("카테고리="+category); 
+
+    // 멤버인지 확인
+    var member_chk;
+    if($("#participant").val()==""){
+        member_chk = false;
+    }else{
+        member_chk = true;
+    }
 
     // 인증샷 idx
     var shotidx = $("#shotidx").val();
@@ -9,6 +17,11 @@ $(document).ready(function(){
     // 하트체크버튼 => 클릭하면 이미지 바뀜
     $("#jo_heart").click(function(){
         console.log("하트 체크 버튼 누름");
+
+        if(member_chk==false){
+            alert("로그인 및 회원가입을 해야 이용가능합니다");
+            return;
+        }
 
         // sort
         var sort = "heart";
@@ -57,6 +70,11 @@ $(document).ready(function(){
     // 사이렌체크버튼 => 클릭하면 이미지 바뀜
     $("#jo_siren").click(function(){
         console.log("사이렌 체크 버튼 누름");
+
+        if(member_chk==false){
+            alert("로그인 및 회원가입을 해야 이용가능합니다");
+            return;
+        }
 
         /*
         데이터베이스 값 변화

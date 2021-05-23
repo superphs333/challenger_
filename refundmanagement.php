@@ -168,7 +168,7 @@
                         <!-- <a
                         onclick="window.open('challengeindividualmanagement.php?idx=<?php echo $challengeidx ?>&user=<?php echo $user ?>&refund=<?php echo $idx ?>','_black','width=700,height=500px,toolbars=no,scrollbars=no')"
                         >유저 챌린지 페이지</a> -->
-                        <a>유저챌린지 페이지</a>
+                        <a style="cursor:pointer;">유저챌린지 페이지</a>
                     </td>
 
                     <!-- 주문번호 -->

@@ -19,8 +19,6 @@
     $temp = "select c.title,c.video,cs.shot,cs.challengeidx,cs.idx,cs.joiner,cs.fit,c.endday,c.startday,cs.handleok from challengeshot as cs left join challenge as c on cs.challengeidx=c.idx where cs.idx={$shotidx}";
 
     
-
-
     $sql = mq($temp);
     $row = $sql->fetch_array();
     $video = $row['video']; // 비디오 or 사진
@@ -52,6 +50,7 @@
                 <td class="title">인증샷</td>
                 <td class="content">
                     <?php
+
                     if($video==0){  // 사진인증인 경우 ?>
                     <img style="width:100px; height:100px;" src="<?php echo $shot ?>">
                     <?php }else{//비디오 인증인 경우 ?>

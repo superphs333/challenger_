@@ -18,6 +18,9 @@ if($_GET['joinable']=="1"){
     $joinable = "1";
 }
 
+//$temp = $temp." ORDER BY date_time desc";
+//echo $temp;
+
 //echo $temp;
 $sql = mq($temp);
 $count = mysqli_num_rows($sql);

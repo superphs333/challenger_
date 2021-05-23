@@ -129,6 +129,15 @@
         }
     }
 
+    // 회원만 클릭 가능
+    function member_able(){
+        if($_SESSION['user']==""){
+            echo"<script>
+            alert('회원만 가능합니다. 회원가입 또는 로그인을 해주세요');
+            </script>";
+        }
+    }
+
     // 페이징
     function paging($total_rows,$list,$b_pageNum_list){
         // 매개변수 : 총 레코드 수,sql문, 한 페이지에 몇 개의 글을 보여줄지,블록에 나타낼 페이지 번호 갯수      

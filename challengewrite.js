@@ -7,7 +7,8 @@ $(document).ready(function () {
     // 서머노트
     $('#summernote').summernote({
         // set editor height
-        minHeight: null,             // set minimum height of editor
+        height : 600,
+        minHeight: 600,             // set minimum height of editor
         maxHeight: null,             // set maximum height of editor
         
         lang: "ko-KR", // 한글 설정

@@ -93,61 +93,64 @@ for($i=0; $i<10; $i++){
 <!-- 페이징 -->
 <div style="text-align:center">
 <?php
-    if($pageNum<=1){//페이지번호가 1보다 작거나 같다면
+    if($total_rows!=0){
+        if($pageNum<=1){//페이지번호가 1보다 작거나 같다면
 
-        echo "<font size=2 color=red> [처음] </font>";
-            // 링크없이 그냥 처음이라는 문자만 출력
-    }else{ // 1보다 크다면
-
-        echo "<font size=2><a class='pagelink' href='mypage.php?page=&list={$list}&joinable={$joinable}&mypage=heartshot'> [처음] </a></font>";
+            echo "<font size=2 color=red> [처음] </font>";
+                // 링크없이 그냥 처음이라는 문자만 출력
+        }else{ // 1보다 크다면
     
-    }
-    
-    if($block<=1){
+            echo "<font size=2><a class='pagelink' href='mypage.php?page=&list={$list}&joinable={$joinable}&mypage=heartshot'> [처음] </a></font>";
         
-        // block이 1보다 작거나 같다면 , 더 이상 거꾸로 갈 수 없으므로 아무 표시도 하지 않는다.
-        echo "<font></font>";
-    }else{  
-        $insertpage = $b_start_page-1;
-        echo "<font size=2><a class='pagelink' href='mypage.php?page={$insertpage}&list={$list}&joinable={$joinable}&mypage=heartshot'> 이전 </a></font>";
-    }
-    
-    for($j=$b_start_page; $j<=$b_end_page; $j++){
-        if($pageNum==$j){
-            
-            // pageNum=j이면, 현재 페이지이므로,링크걸지않고 그냥 현재 페이지만 출력
-            echo "<font class='pagelink' size=2 color=red> {$j} </font>";
-        }else{
-            
-            echo"<font size=2><a class='pagelink' href='mypage.php?page={$j}&list={$list}&joinable={$joinable}&mypage=heartshot'> {$j} </a></font>";
-                // 현재 페이지를 제외한 나머지 페이지 번호를 링크를 달아 출력하기
-
-                
         }
         
-    }
-
-    // 블럭의 총 갯수
-    $total_block = ceil($total_page/$b_pageNum_list);
-
-    if($block>=$total_block){
+        if($block<=1){
+            
+            // block이 1보다 작거나 같다면 , 더 이상 거꾸로 갈 수 없으므로 아무 표시도 하지 않는다.
+            echo "<font></font>";
+        }else{  
+            $insertpage = $b_start_page-1;
+            echo "<font size=2><a class='pagelink' href='mypage.php?page={$insertpage}&list={$list}&joinable={$joinable}&mypage=heartshot'> 이전 </a></font>";
+        }
         
-        // block과 총block의 갯수가 값이 같다면, 맨 마지막 블록이므로 다음 링크버튼이 필요없어 보여주지 않는다.
-        echo "<font></font>";
-    }else{
-        // 그게아니라면, 다음 링크버튼을 걸어 보여준다
-        $temp = $b_end_page+1;
-        echo "<font size=2><a class='pagelink' href='mypage.php?page={$temp}&list={$list}&joinable={$joinable}&mypage=heartshot'> 다음 </a></font>";
+        for($j=$b_start_page; $j<=$b_end_page; $j++){
+            if($pageNum==$j){
+                
+                // pageNum=j이면, 현재 페이지이므로,링크걸지않고 그냥 현재 페이지만 출력
+                echo "<font class='pagelink' size=2 color=red> {$j} </font>";
+            }else{
+                
+                echo"<font size=2><a class='pagelink' href='mypage.php?page={$j}&list={$list}&joinable={$joinable}&mypage=heartshot'> {$j} </a></font>";
+                    // 현재 페이지를 제외한 나머지 페이지 번호를 링크를 달아 출력하기
+    
+                    
+            }
+            
+        }
+    
+        // 블럭의 총 갯수
+        $total_block = ceil($total_page/$b_pageNum_list);
+    
+        if($block>=$total_block){
+            
+            // block과 총block의 갯수가 값이 같다면, 맨 마지막 블록이므로 다음 링크버튼이 필요없어 보여주지 않는다.
+            echo "<font></font>";
+        }else{
+            // 그게아니라면, 다음 링크버튼을 걸어 보여준다
+            $temp = $b_end_page+1;
+            echo "<font size=2><a class='pagelink' href='mypage.php?page={$temp}&list={$list}&joinable={$joinable}&mypage=heartshot'> 다음 </a></font>";
+        }
+    
+        // 마지막 링크 버튼
+        if($pageNum>=$total_page){
+            // 페이지넘버 = 총페이지
+            echo "<font size=2 color=red> [마지막] </font>";
+        }else{
+            //그게 아니라면
+            echo "<font size=2><a class='pagelink' href='mypage.php?page={$total_page}&list={$list}&joinable={$joinable}&mypage=heartshot'> [마지막] </a></font>";
+        }
     }
 
-    // 마지막 링크 버튼
-    if($pageNum>=$total_page){
-        // 페이지넘버 = 총페이지
-        echo "<font size=2 color=red> [마지막] </font>";
-    }else{
-        //그게 아니라면
-        echo "<font size=2><a class='pagelink' href='mypage.php?page={$total_page}&list={$list}&joinable={$joinable}&mypage=heartshot'> [마지막] </a></font>";
-    }
 ?>
 </div>
 

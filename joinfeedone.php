@@ -30,7 +30,7 @@ $shotidx = $_GET['shotidx'];
 $temp = "select * from challengeshot where idx={$shotidx}";
 $sql = mq($temp);
 $row = $sql->fetch_array();
-$challengeidx = $row['challengeidx']; // 챌린지 idx
+$challengeidx = $row['challengeidx']; // 챌린지 idx 
 $email = $row['joiner'];
 $challengename = mq("select * from challenge where idx='{$challengeidx}'");
 $challengename = $challengename->fetch_array();
@@ -40,6 +40,7 @@ $date = $row['date'];
 $imgorvideo = $row['video']; //사진or비디오
 $src = $row['shot'];
 ?>
+<input type="hidden" id="participant" value="<?php echo $_SESSION['user'] ?>">
 <!-- 인증샷 번호 -->
 <input type="hidden" value="<?php echo $shotidx ?>" id="shotidx">
 <!-- 카테고리-->

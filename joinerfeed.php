@@ -145,6 +145,7 @@ if($sql->num_rows==0){
 
 </div>
 <?php
+    if($total_rows!=0){ // 게시물이 있는 경우에만
         if($pageNum<=1){//페이지번호가 1보다 작거나 같다면
 
             echo "<font size=2 color=red> [처음] </font>";
@@ -200,6 +201,8 @@ if($sql->num_rows==0){
             //그게 아니라면
             echo "<font size=2><a href='joinerfeed.php?page={$total_page}&list={$list}&joiner={$nickname}'> [마지막] </a></font>";
         }
+    }
+
 ?>
 </div>
 

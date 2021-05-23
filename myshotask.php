@@ -104,12 +104,12 @@ HTML;
                 <td>
                 <?php
                     // 챌린지 idx로 => 인증샷 src 가져오기
-                    $forsrc = mq("select * from challengeshot where idx={$challengeshotidx}");
+                    $forsrc = mq("select video, shot from challengeshot left join challenge on challengeshot.challengeidx=challenge.idx where challengeshot.idx={$challengeshotidx}");
                     $forsrc = $forsrc->fetch_array();
                     $video = $forsrc['video']; // 사진or비디오
                     $src = $forsrc['shot']; // 샷주소
 
-                    if($imgorvideo==0){  // 사진인증인 경우 ?>
+                    if($video==0){  // 사진인증인 경우 ?>
                     <img src="<?php echo $src ?>">
                     <?php }else{//비디오 인증인 경우 ?>
                     <video src="<?php echo $src ?>" controls>해당 브라우저는 video 태그를 지원하지 않습니다</video>

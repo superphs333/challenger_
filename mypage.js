@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    console.log("mypage.js 시작");
+    console.log("mypage.js 시작"); 
 
     /*
     구분
@@ -117,6 +117,7 @@ $(document).ready(function(){
                 success:function(data){
                     console.log(data);
                     alert("닉네임이 변경되었습니다!");
+                    location.href="./mypage.php?mypage=nicknamechange";
                     location.reload();
                 }
             });
@@ -243,6 +244,14 @@ $(document).ready(function(){
                     $("#nowPassword").val("");
                     $("#inputPassword").val("");
                     $("#inputPasswordCheck").val("");
+
+                    // 알림창 안보이기
+                    $("#alert-success").hide();
+                    $("#alert-danger").hide();
+                    $("#pwtext").hide();
+
+                    location.href="./mypage.php?mypage=pwchange";
+
                 }
             }
         });

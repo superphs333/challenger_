@@ -51,14 +51,32 @@ $(document).ready(function () {
     
 
 
-});
+}); 
 
-function test(){
+function test(){ 
     location.href='http://13.209.234.165:3000/form?';
 }
 
-// 환불하기
+// 환불
 function cancelPay(){
+    jQuery.ajax({
+        "url": "http://www.myservice.com/payments/cancel",
+        "type": "POST",
+        "contentType": "application/json",
+        "data": JSON.stringify({
+          "merchant_uid": merchantuid, // 주문번호
+          "cancel_request_amount": 2000, // 환불금액
+          "reason": "테스트 결제 환불", // 환불사유
+        //   "refund_holder": "홍길동" // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
+        //   "refund_bank": "88", // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(ex. KG이니시스의 경우 신한은행은 88번)
+        //   "refund_account": "56211105948400" // [가상계좌 환불시 필수입력] 환불 수령계좌 번호
+        }),
+        "dataType": "json"
+      });
+}
+
+// 환불하기
+function cancelPay2(){
     jQuery.ajax({
         "url":"./refundmoney.php",
         "type":"POST",
